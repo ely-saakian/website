@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+	.icon-btn {
+		@apply rounded-full p-2 hover:bg-gray-100 dark:hover:bg-gray-700 hover:scale-125 transition ease-in duration-75;
+	}
+
+	.nav-btn {
+		@apply px-4 py-1 transition ease-in duration-150 text-black dark:text-white;
+	}
+}

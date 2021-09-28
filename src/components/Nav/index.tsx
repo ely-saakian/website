@@ -1,0 +1,72 @@
+import { useEffect, useRef, useState } from "react";
+import NavSlider, { TabSliderStyles } from "./NavSlider";
+import { useRouter } from "next/router";
+import Link from "next/link";
+
+const Nav = () => {
+	const router = useRouter();
+	const [sliderStyles, setSliderStyles] = useState<TabSliderStyles>();
+	const homeTabRef = useRef<HTMLDivElement>(null);
+	const blogTabRef = useRef<HTMLDivElement>(null);
+	const projectsTabRef = useRef<HTMLDivElement>(null);
+
+	type RoutesTabRefMap = {
+		[route: string]: React.RefObject<HTMLDivElement>;
+	};
+
+	useEffect(() => {
+		const routesTabRefMap: RoutesTabRefMap = {
+			"/": homeTabRef,
+			"/blog": blogTabRef,
+			"/projects": projectsTabRef,
+		};
+		console.log(router.pathname.split("/"));
+		const ref = routesTabRefMap["/" + router.pathname.split("/")[1]];
+
+		setSliderStyles({
+			height: ref.current?.offsetHeight || 0,
+			width: ref.current?.offsetWidth || 0,
+			left: ref.current?.offsetLeft || 0,
+		});
+	}, [router.pathname]);
+
+	const selectTabHandler = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+		const target = e.target as HTMLDivElement;
+		setSliderStyles({
+			height: target.offsetHeight,
+			width: target.offsetWidth,
+			left: target.offsetLeft,
+		});
+	};
+
+	return (
+		<nav className="text-center">
+			<div className="relative inline-flex flex-row py-1.5 px-1.5 bg-gray-200 dark:bg-gray-800 rounded-full -translate-x-0 text-sm">
+				{sliderStyles && <NavSlider sliderStyles={sliderStyles}></NavSlider>}
+				<Link href="/">
+					<a>
+						<div ref={homeTabRef} className="nav-btn" onClick={selectTabHandler}>
+							Home
+						</div>
+					</a>
+				</Link>
+				<Link href="/blog">
+					<a>
+						<div ref={blogTabRef} className="nav-btn" onClick={selectTabHandler}>
+							Blog
+						</div>
+					</a>
+				</Link>
+				<Link href="/">
+					<a>
+						<div ref={projectsTabRef} className="nav-btn" onClick={selectTabHandler}>
+							Projects
+						</div>
+					</a>
+				</Link>
+			</div>
+		</nav>
+	);
+};
+
+export default Nav;
