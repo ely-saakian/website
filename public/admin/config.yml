@@ -3,6 +3,7 @@ backend:
   repo: ely-saakian/website
   branch: main
   base_url: https://personal-website-theta-orpin.vercel.app/
+  auth_endpoint: api/auth
 media_folder: public/img
 public_folder: img
 collections:
