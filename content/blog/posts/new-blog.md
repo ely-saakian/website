@@ -5,8 +5,9 @@ description: If your application is experiencing load problems, time to bring
   out the champagne! Your web-app must be pretty successful to get to this
   stage.
 date: 2021-09-28T17:55:51.961Z
-thumbnail: images/latest_blogpost_sample_image.png
+thumbnail: /images/latest_blogpost_sample_image.png
 ---
+
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse at vitae erat lectus nam tristique pulvinar. Vulputate fermentum, integer blandit eget aenean. Et leo sem vestibulum cursus natoque ornare vestibulum. Ullamcorper viverra semper turpis tortor accumsan sollicitudin rutrum proin dictum. Eleifend lobortis iaculis tortor urna pulvinar enim. Egestas vitae ultrices a feugiat sit. Est, diam pellentesque sapien orci nunc, viverra netus purus. Aliquet ornare neque pellentesque fermentum non eget. Suspendisse vitae porta porttitor fusce enim risus.\
 \
 Donec eget morbi elit adipiscing tellus adipiscing justo, suscipit ac. Urna neque auctor tempus eget nibh faucibus mauris dignissim vitae. Nec vel nunc, sagittis nibh. Orci nunc egestas euismod quam mi purus in odio aliquet. Urna molestie amet, dignissim quam nunc lorem. Volutpat rutrum magna malesuada diam commodo. Lorem tortor, fermentum vitae consequat gravida libero varius morbi. At libero urna mi vulputate quam nibh. Ipsum aliquam tortor, elementum amet mauris. Egestas dolor mi nisi, lacus donec quam. Tortor non nec accumsan mattis duis imperdiet. Ac sed montes, netus ac. Lectus sit placerat aliquam ultrices sed quisque eu. Consequat commodo tempor ac risus.\

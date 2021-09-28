@@ -16,22 +16,20 @@ const Home: NextPage = () => {
 	};
 
 	return (
-		<Layout>
-			<Main>
-				<Masonry
-					breakpointCols={breakpointColumnsObj}
-					className="my-masonry-grid flex space-x-10"
-					columnClassName="my-masonry-grid_column space-y-10"
-				>
-					<IntroCard></IntroCard>
-					<LatestBlogPostCard></LatestBlogPostCard>
-					<LatestProjectCard></LatestProjectCard>
-					<ReadingNowCard></ReadingNowCard>
-					<RandomQuoteCard></RandomQuoteCard>
-					<SubscribeCard></SubscribeCard>
-				</Masonry>
-			</Main>
-		</Layout>
+		<Main>
+			<Masonry
+				breakpointCols={breakpointColumnsObj}
+				className="my-masonry-grid flex space-x-10"
+				columnClassName="my-masonry-grid_column space-y-10"
+			>
+				<IntroCard></IntroCard>
+				<LatestBlogPostCard></LatestBlogPostCard>
+				<LatestProjectCard></LatestProjectCard>
+				<ReadingNowCard></ReadingNowCard>
+				<RandomQuoteCard></RandomQuoteCard>
+				<SubscribeCard></SubscribeCard>
+			</Masonry>
+		</Main>
 	);
 };
 

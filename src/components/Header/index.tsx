@@ -8,9 +8,9 @@ const Header = () => {
 			<div className="flex w-full sm:w-auto justify-between">
 				<Link href="/">
 					<a title="Go Home">
-						<h1 className="font-bold text-2xl text-transparent bg-clip-text bg-gradient-to-br from-[#9CD6FF] to-[#6C95B1] inline-block">
+						<p className="font-bold text-2xl text-transparent bg-clip-text bg-gradient-to-br from-[#9CD6FF] to-[#6C95B1] inline-block">
 							Ely Saakian
-						</h1>
+						</p>
 					</a>
 				</Link>
 				<div className="sm:hidden">
