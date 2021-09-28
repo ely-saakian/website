@@ -5,6 +5,7 @@ import Link from "next/link";
 
 const Nav = () => {
 	const router = useRouter();
+
 	const [sliderStyles, setSliderStyles] = useState<TabSliderStyles>();
 	const homeTabRef = useRef<HTMLDivElement>(null);
 	const blogTabRef = useRef<HTMLDivElement>(null);
@@ -20,7 +21,7 @@ const Nav = () => {
 			"/blog": blogTabRef,
 			"/projects": projectsTabRef,
 		};
-		console.log(router.pathname.split("/"));
+
 		const ref = routesTabRefMap["/" + router.pathname.split("/")[1]];
 
 		setSliderStyles({

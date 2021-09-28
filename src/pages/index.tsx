@@ -7,6 +7,7 @@ import RandomQuoteCard from "../components/Homepage/Main/RandomQuoteCard";
 import Main from "../components/Homepage/Main";
 import Masonry from "react-masonry-css";
 import SubscribeCard from "../components/Blog/SubscribeCard";
+import Layout from "../components/Layout";
 
 const Home: NextPage = () => {
 	const breakpointColumnsObj = {
@@ -15,20 +16,22 @@ const Home: NextPage = () => {
 	};
 
 	return (
-		<Main>
-			<Masonry
-				breakpointCols={breakpointColumnsObj}
-				className="my-masonry-grid flex space-x-10"
-				columnClassName="my-masonry-grid_column space-y-10"
-			>
-				<IntroCard></IntroCard>
-				<LatestBlogPostCard></LatestBlogPostCard>
-				<LatestProjectCard></LatestProjectCard>
-				<ReadingNowCard></ReadingNowCard>
-				<RandomQuoteCard></RandomQuoteCard>
-				<SubscribeCard></SubscribeCard>
-			</Masonry>
-		</Main>
+		<Layout>
+			<Main>
+				<Masonry
+					breakpointCols={breakpointColumnsObj}
+					className="my-masonry-grid flex space-x-10"
+					columnClassName="my-masonry-grid_column space-y-10"
+				>
+					<IntroCard></IntroCard>
+					<LatestBlogPostCard></LatestBlogPostCard>
+					<LatestProjectCard></LatestProjectCard>
+					<ReadingNowCard></ReadingNowCard>
+					<RandomQuoteCard></RandomQuoteCard>
+					<SubscribeCard></SubscribeCard>
+				</Masonry>
+			</Main>
+		</Layout>
 	);
 };
 

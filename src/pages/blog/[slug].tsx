@@ -1,6 +1,12 @@
 // @ts-nocheck
+import Layout from "../../components/Layout";
+
 const BlogPost = ({ post }) => {
-	return <h1>BlogPost {post}</h1>;
+	return (
+		<Layout>
+			<h1>BlogPost {post}</h1>
+		</Layout>
+	);
 };
 
 export async function getStaticProps(context) {
