@@ -2,6 +2,7 @@ backend:
   name: github
   repo: ely-saakian/website
   branch: main
+  base_url: https://personal-website-theta-orpin.vercel.app/
 media_folder: public/img
 public_folder: img
 collections:
