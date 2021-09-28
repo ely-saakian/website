@@ -1,7 +1,7 @@
 backend:
-  name: test-repo
-  # repo: ely-saakian/website
-  # branch: main
+  name: github
+  repo: ely-saakian/website
+  branch: main
 media_folder: public/img
 public_folder: img
 collections:
