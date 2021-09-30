@@ -9,29 +9,48 @@ import Link from "next/link";
 const Blog = ({ posts }: { posts: any[] }) => {
 	return (
 		<Main>
-			{posts.map(({ slug, frontmatter: { title, description, date, thumbnail, readingTime } }) => (
-				<Link key={date} href={`/blog/${slug}`}>
-					<a>
-						<BlogpostCard
-							title={title}
-							description={description}
-							date={date}
-							image={thumbnail}
-							readingTime={readingTime}
-						></BlogpostCard>
-					</a>
-				</Link>
-			))}
+			{posts.length !== 0 ? (
+				posts.map(({ slug, frontmatter: { title, description, date, thumbnail, readingTime } }) => (
+					<Link key={date} href={`/blog/${slug}`}>
+						<a>
+							<BlogpostCard
+								title={title}
+								description={description}
+								date={date}
+								image={thumbnail}
+								readingTime={readingTime}
+							></BlogpostCard>
+						</a>
+					</Link>
+				))
+			) : (
+				<div className="flex flex-col flex-1 place-content-center">
+					<h1 className="text-center italic font-light dark:text-white text-black">No posts yes. Stay tuned.</h1>
+				</div>
+			)}
 			<SubscribeCard></SubscribeCard>
 		</Main>
 	);
 };
 
 export async function getStaticProps() {
-	const files = fs.readdirSync(`${process.cwd()}/content/blog/posts`);
+	let files;
+
+	try {
+		files = fs.readdirSync(`${process.cwd()}/content/blog/posts`);
+	} catch (e) {
+		console.warn(e);
+		return { props: { posts: [] } };
+	}
 
 	const posts = files.map((filename) => {
-		const markdownWithMetadata = fs.readFileSync(`content/blog/posts/${filename}`).toString();
+		let markdownWithMetadata;
+		try {
+			markdownWithMetadata = fs.readFileSync(`content/blog/posts/${filename}`).toString();
+		} catch (e) {
+			console.warn(e);
+			return { props: { posts: [] } };
+		}
 
 		const { data, content } = matter(markdownWithMetadata);
 

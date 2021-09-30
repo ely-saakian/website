@@ -11,3 +11,7 @@
 		@apply px-4 py-1 transition ease-in duration-150 text-black dark:text-white;
 	}
 }
+
+html {
+	overflow-y: scroll;
+}

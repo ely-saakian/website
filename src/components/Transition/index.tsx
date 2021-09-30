@@ -24,7 +24,7 @@ const getTransitionStyles = {
 
 const Transition = ({ children, location }: { children: React.ReactNode; location: string }) => {
 	return (
-		<TransitionGroup style={{ position: "relative" }}>
+		<TransitionGroup style={{ position: "relative" }} className="flex flex-col flex-1">
 			<ReactTransition
 				key={location}
 				timeout={{
@@ -37,6 +37,7 @@ const Transition = ({ children, location }: { children: React.ReactNode; locatio
 						style={{
 							...(getTransitionStyles[status] as CSSProperties),
 						}}
+						className="flex flex-col flex-1"
 					>
 						{children}
 					</div>

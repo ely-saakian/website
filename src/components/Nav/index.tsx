@@ -10,6 +10,7 @@ const Nav = () => {
 	const homeTabRef = useRef<HTMLDivElement>(null);
 	const blogTabRef = useRef<HTMLDivElement>(null);
 	const projectsTabRef = useRef<HTMLDivElement>(null);
+	const errorTabRef = useRef<HTMLDivElement>(null);
 
 	type RoutesTabRefMap = {
 		[route: string]: React.RefObject<HTMLDivElement>;
@@ -20,10 +21,11 @@ const Nav = () => {
 			"/": homeTabRef,
 			"/blog": blogTabRef,
 			"/projects": projectsTabRef,
+			"/404": errorTabRef,
 		};
 
 		const ref = routesTabRefMap["/" + router.pathname.split("/")[1]];
-
+		console.log(router.pathname);
 		setSliderStyles({
 			height: ref.current?.offsetHeight || 0,
 			width: ref.current?.offsetWidth || 0,
@@ -44,6 +46,7 @@ const Nav = () => {
 		<nav className="text-center">
 			<div className="relative inline-flex flex-row py-1.5 px-1.5 bg-gray-200 dark:bg-gray-800 rounded-full -translate-x-0 text-sm">
 				{sliderStyles && <NavSlider sliderStyles={sliderStyles}></NavSlider>}
+				<div className="hidden" ref={errorTabRef}></div>
 				<Link href="/">
 					<a>
 						<div ref={homeTabRef} className="nav-btn" onClick={selectTabHandler}>

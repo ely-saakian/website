@@ -37,8 +37,15 @@ const BlogPost: React.FC<BlogPostProps> = ({ post }) => {
 	);
 };
 
-export const getStaticPaths: GetStaticPaths = async () => {
-	const files = fs.readdirSync("content/blog/posts");
+export const getStaticPaths: GetStaticPaths | {} = async () => {
+	let files;
+
+	try {
+		files = fs.readdirSync(`${process.cwd()}/content/blog/posts`);
+	} catch (e) {
+		console.warn(e);
+		return { paths: [], fallback: false };
+	}
 
 	const paths = files.map((filename) => ({
 		params: {
@@ -58,7 +65,14 @@ interface IGetStaticPropsParams extends ParsedUrlQuery {
 
 export const getStaticProps: GetStaticProps = (context) => {
 	const { slug } = context.params as IGetStaticPropsParams;
-	const markdownWithMetadata = fs.readFileSync(path.join("content/blog/posts", slug + ".md")).toString();
+	let markdownWithMetadata = "";
+
+	try {
+		markdownWithMetadata = fs.readFileSync(path.join("content/blog/posts", slug + ".md")).toString();
+	} catch (e) {
+		console.warn(e);
+		return { props: {} };
+	}
 
 	const { data, content } = matter(markdownWithMetadata);
 
