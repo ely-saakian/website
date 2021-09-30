@@ -7,6 +7,9 @@ import { ParsedUrlQuery } from "querystring";
 import Image from "next/image";
 import marked from "marked";
 import DOMPurify from "isomorphic-dompurify";
+import SubscribeCard from "../../components/Blog/SubscribeCard";
+import { ChevronLeftIcon } from "@heroicons/react/solid";
+import { useRouter } from "next/router";
 
 type BlogPostProps = {
 	post: {
@@ -20,20 +23,31 @@ type BlogPostProps = {
 };
 
 const BlogPost: React.FC<BlogPostProps> = ({ post }) => {
+	const router = useRouter();
+
 	return (
-		<article>
-			<div className="flex flex-col space-y-5 p-10">
-				<h1 className="text-2xl lg:text-4xl font-bold">{post.title}</h1>
-				<p className="text-lg text-gray-500 dark:text-white">{post.description}</p>
-				<p className="font-light italic text-gray-500 dark:text-white">
-					{post.date} · {post.readingTime}
-				</p>
+		<>
+			<div>
+				<button className="text-gray-400 inline-flex items-center" onClick={() => router.push("/blog")}>
+					<ChevronLeftIcon className="w-7 h-7 mr-1"></ChevronLeftIcon>
+					<span>Blog</span>
+				</button>
 			</div>
-			<div className="h-[250px] sm:h-[450px] relative">
-				<Image src={post.thumbnail} alt={post.title} objectFit="cover" layout="fill"></Image>
-			</div>
-			<div className="prose mx-auto p-10" dangerouslySetInnerHTML={{ __html: post.content }}></div>
-		</article>
+			<article>
+				<div className="flex flex-col space-y-5 p-10">
+					<h1 className="text-2xl lg:text-4xl font-bold dark:text-white">{post.title}</h1>
+					<p className="text-lg text-gray-500 dark:text-white">{post.description}</p>
+					<p className="font-light italic text-gray-500 dark:text-white">
+						{post.date} · {post.readingTime}
+					</p>
+				</div>
+				<div className="h-[250px] sm:h-[450px] relative">
+					<Image src={"/" + post.thumbnail} alt={post.title} objectFit="cover" layout="fill"></Image>
+				</div>
+				<div className="prose mx-auto p-10 dark:text-white" dangerouslySetInnerHTML={{ __html: post.content }}></div>
+				<SubscribeCard></SubscribeCard>
+			</article>
+		</>
 	);
 };
 

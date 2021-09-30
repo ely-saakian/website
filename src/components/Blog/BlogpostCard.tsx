@@ -11,9 +11,9 @@ type BlogpostCardProps = {
 const BlogpostCard = ({ title, image, date, description, readingTime }: BlogpostCardProps) => {
 	return (
 		<article className="flex flex-col md:flex-row rounded-xl shadow-lg dark:bg-gray-700">
-			<div className="h-[200px] md:h-auto md:w-[600px] bg-blue-200 rounded-t-xl relative md:rounded-tr-none md:rounded-l-xl">
+			<div className="h-[200px] md:h-auto md:w-[300px] bg-blue-200 rounded-t-xl relative md:rounded-tr-none md:rounded-l-xl">
 				<Image
-					src={image}
+					src={"/" + image}
 					alt="Blog post images"
 					layout="fill"
 					objectFit="cover"
