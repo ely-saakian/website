@@ -15,6 +15,7 @@
 		"@tailwindcss/typography": "^0.4.1",
 		"@types/marked": "^3.0.1",
 		"@types/react-transition-group": "^4.4.3",
+		"date-fns": "^2.24.0",
 		"i": "^0.3.7",
 		"isomorphic-dompurify": "^0.15.0",
 		"marked": "^3.0.4",
