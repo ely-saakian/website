@@ -61,7 +61,7 @@ const Nav = () => {
 						</div>
 					</a>
 				</Link>
-				<Link href="/">
+				<Link href="/projects">
 					<a>
 						<div ref={projectsTabRef} className="nav-btn" onClick={selectTabHandler}>
 							Projects
