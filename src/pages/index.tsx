@@ -2,7 +2,6 @@ import type { GetStaticProps, NextPage } from "next";
 import IntroCard from "../components/Homepage/Main/IntroCard";
 import LatestBlogPostCard from "../components/Homepage/Main/LatestBlogPostCard";
 import ProjectCard from "../components/Homepage/Main/ProjectCard";
-import ReadingNowCard from "../components/Homepage/Main/ReadingNowCard";
 import RandomQuoteCard from "../components/Homepage/Main/RandomQuoteCard";
 import Main from "../components/Homepage/Main";
 import Masonry from "react-masonry-css";
@@ -39,7 +38,6 @@ const Home: NextPage<HomePageProps> = ({ latestPost, latestProject }) => {
 				<IntroCard></IntroCard>
 				<LatestBlogPostCard latestPost={latestPost}></LatestBlogPostCard>
 				<ProjectCard latestProject project={latestProject}></ProjectCard>
-				<ReadingNowCard></ReadingNowCard>
 				<RandomQuoteCard></RandomQuoteCard>
 				<SubscribeCard></SubscribeCard>
 			</Masonry>
@@ -83,26 +81,26 @@ export const getStaticProps: GetStaticProps = async () => {
 
 	const reposApi = "https://api.github.com/users/ely-saakian/repos";
 
-	const response = await fetch(reposApi);
-	const reposData = await response.json();
+	// const response = await fetch(reposApi);
+	// const reposData = await response.json();
 
-	const latestProjectData = reposData.sort((repo1: any, repo2: any) => repo2.updated_at - repo1.updated_at)[0];
+	// const latestProjectData = reposData.sort((repo1: any, repo2: any) => repo2.updated_at - repo1.updated_at)[0];
 
-	const query = gql`
-			{
-				repository(owner: "ely-saakian", name: "${latestProjectData.name}") {
-					openGraphImageUrl
-				}
-			}
-		`;
+	// const query = gql`
+	// 		{
+	// 			repository(owner: "ely-saakian", name: "${latestProjectData.name}") {
+	// 				openGraphImageUrl
+	// 			}
+	// 		}
+	// 	`;
 
-	const graphQLClient = new GraphQLClient("https://api.github.com/graphql", {
-		headers: {
-			authorization: "Bearer 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",
-		},
-	});
+	// const graphQLClient = new GraphQLClient("https://api.github.com/graphql", {
+	// 	headers: {
+	// 		authorization: "Bearer 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",
+	// 	},
+	// });
 
-	const graphQLresponse = await graphQLClient.request(query);
+	// const graphQLresponse = await graphQLClient.request(query);
 
 	return {
 		props: {
@@ -116,12 +114,19 @@ export const getStaticProps: GetStaticProps = async () => {
 				timeToRead,
 				slug,
 			},
+			// latestProject: {
+			// 	title: latestProjectData.name,
+			// 	description: latestProjectData.description,
+			// 	url: latestProjectData.html_url,
+			// 	imageUrl: graphQLresponse.repository.openGraphImageUrl,
+			// 	date: formatDistanceToNow(new Date(latestProjectData.updated_at), { addSuffix: true }),
+			// },
 			latestProject: {
-				title: latestProjectData.name,
-				description: latestProjectData.description,
-				url: latestProjectData.html_url,
-				imageUrl: graphQLresponse.repository.openGraphImageUrl,
-				date: formatDistanceToNow(new Date(latestProjectData.updated_at), { addSuffix: true }),
+				title: "lol",
+				description: "hahah",
+				url: "/",
+				imageUrl: "/images/weather-repo-preview.jpg",
+				date: formatDistanceToNow(new Date(), { addSuffix: true }),
 			},
 		},
 		revalidate: 60 * 60 * 24,

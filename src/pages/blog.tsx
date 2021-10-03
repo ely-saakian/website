@@ -9,25 +9,19 @@ import Link from "next/link";
 const Blog = ({ posts }: { posts: any[] }) => {
 	return (
 		<Main>
-			{posts.length !== 0 ? (
-				posts.map(({ slug, frontmatter: { title, description, date, thumbnail, readingTime } }) => (
-					<Link key={date} href={`/blog/${slug}`}>
-						<a>
-							<BlogpostCard
-								title={title}
-								description={description}
-								date={date}
-								image={thumbnail}
-								readingTime={readingTime}
-							></BlogpostCard>
-						</a>
-					</Link>
-				))
-			) : (
-				<div className="flex flex-col flex-1 place-content-center">
-					<h1 className="text-center italic font-light dark:text-white text-black">No posts yes. Stay tuned.</h1>
-				</div>
-			)}
+			{posts.map(({ slug, frontmatter: { title, description, date, thumbnail, readingTime } }) => (
+				<Link key={title} href={`/blog/${slug}`}>
+					<a>
+						<BlogpostCard
+							title={title}
+							description={description}
+							date={date}
+							image={thumbnail}
+							readingTime={readingTime}
+						></BlogpostCard>
+					</a>
+				</Link>
+			))}
 			<SubscribeCard></SubscribeCard>
 		</Main>
 	);

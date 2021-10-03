@@ -25,7 +25,7 @@ const Nav = () => {
 		};
 
 		const ref = routesTabRefMap["/" + router.pathname.split("/")[1]];
-		console.log(router.pathname);
+
 		setSliderStyles({
 			height: ref.current?.offsetHeight || 0,
 			width: ref.current?.offsetWidth || 0,

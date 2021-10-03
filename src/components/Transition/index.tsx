@@ -1,5 +1,5 @@
 import { CSSProperties } from "react";
-import { TransitionGroup, Transition as ReactTransition, TransitionStatus } from "react-transition-group";
+import { TransitionGroup, Transition as ReactTransition } from "react-transition-group";
 const TIMEOUT = 200;
 
 const getTransitionStyles = {
@@ -24,7 +24,7 @@ const getTransitionStyles = {
 
 const Transition = ({ children, location }: { children: React.ReactNode; location: string }) => {
 	return (
-		<TransitionGroup style={{ position: "relative" }} className="flex flex-col flex-1">
+		<TransitionGroup className="relative">
 			<ReactTransition
 				key={location}
 				timeout={{
@@ -37,7 +37,6 @@ const Transition = ({ children, location }: { children: React.ReactNode; locatio
 						style={{
 							...(getTransitionStyles[status] as CSSProperties),
 						}}
-						className="flex flex-col flex-1"
 					>
 						{children}
 					</div>

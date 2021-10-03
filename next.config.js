@@ -9,4 +9,7 @@ module.exports = {
 		});
 		return cfg;
 	},
+	images: {
+		domains: ["repository-images.githubusercontent.com"],
+	},
 };

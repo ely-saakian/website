@@ -17,7 +17,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, latestProject }) => 
 				</div>
 				<div className="h-[200px] relative">
 					<Image
-						src="/images/weather-repo-preview.jpg"
+						src={project.imageUrl}
 						alt="Weather app powered by Open Weather API Image"
 						layout="fill"
 						objectFit="cover"
