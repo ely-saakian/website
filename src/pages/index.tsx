@@ -9,7 +9,6 @@ import SubscribeCard from "../components/Blog/SubscribeCard";
 import fs from "fs";
 import matter from "gray-matter";
 import readingTime from "reading-time";
-import { formatDistanceToNow } from "date-fns";
 import { Project } from "./projects";
 import { gql, GraphQLClient } from "graphql-request";
 
@@ -118,7 +117,7 @@ export const getStaticProps: GetStaticProps = async () => {
 				latestPostData: {
 					data: {
 						...latestPostData.data,
-						date: latestPostData.data.date,
+						date: new Date(latestPostData.data.date).toString(),
 					},
 				},
 				timeToRead,
