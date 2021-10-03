@@ -1,8 +1,9 @@
 ---
 layout: blog
-title: Test from phone
-description: Short blog about nothing really
-date: 2021-09-30T05:11:13.084Z
-thumbnail: images/latest_blogpost_sample_image.png
+title: Welcome to my blog!
+description: Hey, subscribe and stay tuned. Post about how I built this website
+  is coming soon!
+date: 2021-10-03T22:52:17.785Z
+thumbnail: images/ba1be2fd-dd72-4971-89ff-1c6e1db09e82.jpeg
 ---
-Idk what’s goin on haha
+👋🏼
