@@ -67,7 +67,7 @@ export const getStaticProps: GetStaticProps = async () => {
 				description: repo.description,
 				url: repo.html_url,
 				imageUrl: graphQLresponse.repository.openGraphImageUrl,
-				date: formatDistanceToNow(new Date(repo.updated_at), { addSuffix: true }),
+				date: repo.updated_at,
 			};
 		})
 	);
