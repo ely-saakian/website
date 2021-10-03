@@ -118,7 +118,7 @@ export const getStaticProps: GetStaticProps = async () => {
 				latestPostData: {
 					data: {
 						...latestPostData.data,
-						date: formatDistanceToNow(latestPostData.data.date, { addSuffix: true }),
+						date: latestPostData.data.date,
 					},
 				},
 				timeToRead,
@@ -133,7 +133,7 @@ export const getStaticProps: GetStaticProps = async () => {
 				description: latestProjectData.description,
 				url: latestProjectData.html_url,
 				imageUrl: graphQLresponse.repository.openGraphImageUrl,
-				date: formatDistanceToNow(new Date(latestProjectData.updated_at), { addSuffix: true }),
+				date: latestProjectData.updated_at,
 			},
 		},
 		revalidate: 60 * 60 * 24,

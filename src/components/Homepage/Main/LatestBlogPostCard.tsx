@@ -1,6 +1,7 @@
 import Image from "next/image";
 import matter from "gray-matter";
 import { useRouter } from "next/router";
+import { formatDistanceToNow } from "date-fns";
 
 interface LatestBlogPostCardProps {
 	latestPost: {
@@ -22,7 +23,9 @@ const LatestBlogPostCard: React.FC<LatestBlogPostCardProps> = ({ latestPost }) =
 			<div className="flex flex-col">
 				<div className="flex items-center justify-between px-10 py-5">
 					<p className="font-light dark:text-white">Latest blog post</p>
-					<p className="font-light italic text-gray-500 dark:text-white">{latestPost.latestPostData.data.date}</p>
+					<p className="font-light italic text-gray-500 dark:text-white">
+						{formatDistanceToNow(latestPost.latestPostData.data.date, { addSuffix: true })}
+					</p>
 				</div>
 				<div className="h-[200px] relative">
 					<Image

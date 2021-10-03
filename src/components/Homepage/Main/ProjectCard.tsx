@@ -1,3 +1,4 @@
+import { formatDistanceToNow } from "date-fns";
 import Image from "next/image";
 import { Project } from "../../../pages/projects";
 import ArrowIconBtn from "./ArrowIconBtn";
@@ -13,7 +14,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, latestProject }) => 
 			<div className="flex flex-col">
 				<div className="flex items-center justify-between px-10 py-5">
 					{latestProject && <p className="font-light dark:text-white">Latest project</p>}
-					<p className="font-light italic text-gray-500 dark:text-white">Updated {project.date}</p>
+					<p className="font-light italic text-gray-500 dark:text-white">
+						{formatDistanceToNow(new Date(project.date), { addSuffix: true })}
+					</p>
 				</div>
 				<div className="h-[200px] relative">
 					<Image
