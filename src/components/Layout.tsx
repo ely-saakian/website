@@ -11,6 +11,23 @@ const Layout: React.FC = ({ children }) => {
 		<div className="bg-white dark:bg-gray-900 min-h-screen">
 			<Head>
 				<title>Ely Saakian - Developer</title>
+				<meta
+					name="description"
+					content="Hey, I’m Ely and I am a full-stack developer. Currently a software engineer at Amazon. With my passion for coding I’m here to share the things I learn along
+				my path to being the best at what I do. Also feel free to hit me up for your projects. Cheers!"
+				/>
+				<meta property="og:title" content="Ely Saakian - Developer" key="ogtitle" />+{" "}
+				<meta
+					property="og:description"
+					content="Hey, I’m Ely and I am a full-stack developer. Currently a software engineer at Amazon. With my passion for coding I’m here to share the things I learn along
+				my path to being the best at what I do. Also feel free to hit me up for your projects. Cheers!"
+					key="ogdesc"
+				/>
+				{/* Open Graph */}
+				<meta property="og:url" content="https://elysaakian.com" key="ogurl" />
+				<meta property="og:image" content="images/avatar.png" key="ogimage" />
+				<meta property="og:site_name" content="Ely Saakian - Developer" key="ogsitename" />
+				<meta property="og:title" content="Ely Saakian - Developer" key="ogtitle" />
 			</Head>
 			<Header></Header>
 			<div className="flex flex-col container mx-auto lg:max-w-[960px]">
