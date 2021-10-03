@@ -25,7 +25,7 @@ const Layout: React.FC = ({ children }) => {
 				/>
 				{/* Open Graph */}
 				<meta property="og:url" content="https://elysaakian.com" key="ogurl" />
-				<meta property="og:image" content="images/avatar.png" key="ogimage" />
+				<meta property="og:image" content="https://elysaakian.com/images/social_preview.png" key="ogimage" />
 				<meta property="og:site_name" content="Ely Saakian - Developer" key="ogsitename" />
 				<meta property="og:title" content="Ely Saakian - Developer" key="ogtitle" />
 			</Head>
