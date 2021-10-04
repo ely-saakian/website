@@ -15,7 +15,7 @@ const Socials = () => {
 					<LinkedInIcon></LinkedInIcon>
 				</div>
 			</a>
-			<a href="" rel="noreferrer" target="_blank" title="Shoot an Email">
+			<a href="mailto:ely@elysaakian.com" rel="noreferrer" target="_blank" title="Shoot an Email">
 				<div className="icon-btn">
 					<MailIcon className="h-6 w-6 text-black dark:text-white"></MailIcon>
 				</div>
