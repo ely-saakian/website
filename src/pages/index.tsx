@@ -135,7 +135,7 @@ export const getStaticProps: GetStaticProps = async () => {
 				date: latestProjectData.updated_at,
 			},
 		},
-		revalidate: 60 * 60 * 24,
+		revalidate: 120,
 	};
 };
 
