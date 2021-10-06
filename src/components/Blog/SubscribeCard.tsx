@@ -60,7 +60,7 @@ const SubscribeCard = () => {
 				</button>
 				<ToastContainer></ToastContainer>
 			</div>
-		</article>
+		</div>
 	);
 };
 
