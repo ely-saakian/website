@@ -31,9 +31,9 @@ const SubscribeCard = () => {
 	};
 
 	return (
-		<article className="flex flex-col space-y-5 p-10 mx-auto max-w-[400px]">
-			<h2 className="sm:text-2xl text-xl font-medium dark:text-white text-center">Shall I keep you in the loop?</h2>
-			<p className="text-gray-500 dark:text-white text-center">Subscribe to get new articles in your mail.</p>
+		<div className="flex flex-col space-y-5 p-10 mx-auto max-w-[400px]">
+			<p className="sm:text-2xl text-xl font-medium dark:text-white text-center">Shall I keep you in the loop?</p>
+			<p className="text-gray-500 dark:text-white text-center">Subscribe to get new divs in your mail.</p>
 			<div className="flex flex-col space-y-5">
 				<input
 					onChange={(e) => {
