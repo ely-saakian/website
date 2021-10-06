@@ -1,4 +1,4 @@
-import type { GetStaticProps, NextPage } from "next";
+import type { NextPage } from "next";
 import IntroCard from "../components/Homepage/Main/IntroCard";
 import LatestBlogPostCard from "../components/Homepage/Main/LatestBlogPostCard";
 import ProjectCard from "../components/Homepage/Main/ProjectCard";
@@ -50,7 +50,7 @@ const Home: NextPage<HomePageProps> = ({ latestPost, latestProject, quote }) => 
 	);
 };
 
-export const getStaticProps: GetStaticProps = async () => {
+export async function getStaticProps() {
 	let files;
 
 	try {
@@ -137,6 +137,6 @@ export const getStaticProps: GetStaticProps = async () => {
 		},
 		revalidate: 120,
 	};
-};
+}
 
 export default Home;

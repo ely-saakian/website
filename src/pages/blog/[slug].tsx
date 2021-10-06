@@ -2,7 +2,6 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import readingTime from "reading-time";
-import { GetStaticProps, GetStaticPaths } from "next";
 import { ParsedUrlQuery } from "querystring";
 import Image from "next/image";
 import marked from "marked";
@@ -51,7 +50,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ post }) => {
 	);
 };
 
-export const getStaticPaths: GetStaticPaths | {} = async () => {
+export async function getStaticPaths() {
 	let files;
 
 	try {
@@ -71,13 +70,13 @@ export const getStaticPaths: GetStaticPaths | {} = async () => {
 		paths,
 		fallback: false,
 	};
-};
+}
 
 interface IGetStaticPropsParams extends ParsedUrlQuery {
 	slug: string;
 }
 
-export const getStaticProps: GetStaticProps = (context) => {
+export async function getStaticProps(context: any) {
 	const { slug } = context.params as IGetStaticPropsParams;
 	let markdownWithMetadata = "";
 
@@ -116,6 +115,6 @@ export const getStaticProps: GetStaticProps = (context) => {
 			},
 		},
 	};
-};
+}
 
 export default BlogPost;
