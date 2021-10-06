@@ -17,7 +17,7 @@ const BlogpostCard = ({ title, image, date, description, readingTime }: Blogpost
 					alt="Blog post images"
 					layout="fill"
 					objectFit="cover"
-					className="rounded-t-xl md:rounded-l-xl"
+					className="rounded-t-xl md:rounded-l-xl md:rounded-tr-none"
 				></Image>
 			</div>
 			<div className="flex flex-col space-y-5 p-10">
