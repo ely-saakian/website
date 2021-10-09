@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import IntroCard from "../components/Homepage/Main/IntroCard";
 import LatestBlogPostCard from "../components/Homepage/Main/LatestBlogPostCard";
 import ProjectCard from "../components/Homepage/Main/ProjectCard";
-import RandomQuoteCard from "../components/Homepage/Main/RandomQuoteCard";
+import DailyQuoteCard from "../components/Homepage/Main/DailyQuoteCard";
 import Main from "../components/Homepage/Main";
 import Masonry from "react-masonry-css";
 import SubscribeCard from "../components/Blog/SubscribeCard";
@@ -12,11 +12,6 @@ import readingTime from "reading-time";
 import { Project } from "./projects";
 import { gql, GraphQLClient } from "graphql-request";
 
-export type Quote = {
-	author: string;
-	text: string;
-};
-
 interface HomePageProps {
 	latestPost: {
 		latestPostData: matter.GrayMatterFile<string>;
@@ -24,10 +19,9 @@ interface HomePageProps {
 		slug: string;
 	};
 	latestProject: Project;
-	quote: Quote;
 }
 
-const Home: NextPage<HomePageProps> = ({ latestPost, latestProject, quote }) => {
+const Home: NextPage<HomePageProps> = ({ latestPost, latestProject }) => {
 	const breakpointColumnsObj = {
 		default: 2,
 		768: 1,
@@ -43,7 +37,7 @@ const Home: NextPage<HomePageProps> = ({ latestPost, latestProject, quote }) => 
 				<IntroCard></IntroCard>
 				<LatestBlogPostCard latestPost={latestPost}></LatestBlogPostCard>
 				<ProjectCard latestProject project={latestProject}></ProjectCard>
-				<RandomQuoteCard quote={quote}></RandomQuoteCard>
+				<DailyQuoteCard></DailyQuoteCard>
 				<SubscribeCard></SubscribeCard>
 			</Masonry>
 		</Main>
@@ -107,10 +101,6 @@ export async function getStaticProps() {
 
 	const graphQLresponse = await graphQLClient.request(query);
 
-	const qutoesApi = "https://www.Famous-Quotes.uk/api.php?id=day&tags=failure";
-	const qutoesApiResponse = await fetch(qutoesApi);
-	const quoteData = await qutoesApiResponse.json();
-
 	return {
 		props: {
 			latestPost: {
@@ -123,10 +113,6 @@ export async function getStaticProps() {
 				timeToRead,
 				slug,
 			},
-			quote: {
-				author: quoteData[0][2],
-				text: quoteData[0][1],
-			},
 			latestProject: {
 				title: latestProjectData.name,
 				description: latestProjectData.description,
@@ -135,7 +121,6 @@ export async function getStaticProps() {
 				date: latestProjectData.updated_at,
 			},
 		},
-		revalidate: 120,
 	};
 }
 
