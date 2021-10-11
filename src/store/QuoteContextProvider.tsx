@@ -12,9 +12,9 @@ const QuoteContextProvider: React.FC = ({ children }) => {
 	const [quote, setQuote] = useState(defaultQuote);
 
 	useEffect(() => {
-		const cachedData = getCachedData("dailyQuote");
+		const cachedQuote = getCachedData("dailyQuote");
 
-		if (cachedData === null) {
+		if (cachedQuote === null) {
 			const qutoesApi = "/api/dailyQuote";
 			fetch(qutoesApi)
 				.then((response) => response.json())
@@ -22,6 +22,8 @@ const QuoteContextProvider: React.FC = ({ children }) => {
 					cacheData("dailyQuote", quoteData, 43200000); // 12 hour TTL
 					setQuote(quoteData);
 				});
+		} else {
+			setQuote(cachedQuote);
 		}
 	}, []);
 
