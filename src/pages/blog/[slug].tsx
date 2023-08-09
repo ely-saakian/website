@@ -49,11 +49,11 @@ const BlogPost: React.FC<BlogPostProps> = ({ post }) => {
         </div>
         <div className="h-[250px] sm:h-[450px] relative">
           <Image
-            src={"/" + post.thumbnail}
+            src={post.thumbnail}
             alt={post.title}
             objectFit="cover"
             layout="fill"
-          ></Image>
+          />
         </div>
         <div
           className="prose mx-auto p-10 dark:text-white"
