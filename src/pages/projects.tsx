@@ -6,47 +6,47 @@ import { formatDistanceToNow } from "date-fns";
 import Main from "../components/Homepage/Main/index";
 
 export type Project = {
-	title: string;
-	description: string;
-	url: string;
-	imageUrl: string;
-	date: string;
+  title: string;
+  description: string;
+  url: string;
+  imageUrl: string;
+  date: string;
 };
 
 interface ProjectsProps {
-	projects: Project[];
+  projects: Project[];
 }
 
 const Projects: React.FC<ProjectsProps> = ({ projects }) => {
-	const breakpointColumnsObj = {
-		default: 2,
-		768: 1,
-	};
+  const breakpointColumnsObj = {
+    default: 2,
+    768: 1,
+  };
 
-	return (
-		<Main>
-			<Masonry
-				breakpointCols={breakpointColumnsObj}
-				className="my-masonry-grid flex space-x-10"
-				columnClassName="my-masonry-grid_column space-y-10"
-			>
-				{projects.map((project) => (
-					<ProjectCard key={project.url} project={project}></ProjectCard>
-				))}
-			</Masonry>
-		</Main>
-	);
+  return (
+    <Main>
+      <Masonry
+        breakpointCols={breakpointColumnsObj}
+        className="my-masonry-grid flex space-x-10"
+        columnClassName="my-masonry-grid_column space-y-10"
+      >
+        {projects.map((project) => (
+          <ProjectCard key={project.url} project={project}></ProjectCard>
+        ))}
+      </Masonry>
+    </Main>
+  );
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-	const api = "https://api.github.com/users/ely-saakian/repos";
+  const api = "https://api.github.com/users/ely-saakian/repos";
 
-	const response = await fetch(api);
-	const reposData = await response.json();
+  const response = await fetch(api);
+  const reposData = await response.json();
 
-	const projects = await Promise.all(
-		reposData.map(async (repo: any) => {
-			const query = gql`
+  const projects = await Promise.all(
+    reposData.map(async (repo: any) => {
+      const query = gql`
 			{
 				repository(owner: "ely-saakian", name: "${repo.name}") {
 					openGraphImageUrl
@@ -54,29 +54,32 @@ export const getStaticProps: GetStaticProps = async () => {
 			}
 		`;
 
-			const graphQLClient = new GraphQLClient("https://api.github.com/graphql", {
-				headers: {
-					authorization: "Bearer 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",
-				},
-			});
+      const graphQLClient = new GraphQLClient(
+        "https://api.github.com/graphql",
+        {
+          headers: {
+            authorization: "Bearer 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",
+          },
+        },
+      );
 
-			const graphQLresponse = await graphQLClient.request(query);
+      const graphQLresponse = await graphQLClient.request(query);
 
-			return {
-				title: repo.name,
-				description: repo.description,
-				url: repo.html_url,
-				imageUrl: graphQLresponse.repository.openGraphImageUrl,
-				date: repo.updated_at,
-			};
-		})
-	);
+      return {
+        title: repo.name,
+        description: repo.description,
+        url: repo.html_url,
+        imageUrl: graphQLresponse.repository.openGraphImageUrl,
+        date: repo.updated_at,
+      };
+    }),
+  );
 
-	return {
-		props: {
-			projects,
-		},
-	};
+  return {
+    props: {
+      projects,
+    },
+  };
 };
 
 export default Projects;

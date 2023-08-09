@@ -7,70 +7,75 @@ import readingTime from "reading-time";
 import Link from "next/link";
 
 const Blog = ({ posts }: { posts: any[] }) => {
-	return (
-		<Main>
-			{posts.map(({ slug, frontmatter: { title, description, date, thumbnail, readingTime } }) => (
-				<Link key={title} href={`/blog/${slug}`}>
-					<a>
-						<BlogpostCard
-							title={title}
-							description={description}
-							date={date}
-							image={thumbnail}
-							readingTime={readingTime}
-						></BlogpostCard>
-					</a>
-				</Link>
-			))}
-			<SubscribeCard></SubscribeCard>
-		</Main>
-	);
+  return (
+    <Main>
+      {posts.map(
+        ({
+          slug,
+          frontmatter: { title, description, date, thumbnail, readingTime },
+        }) => (
+          <Link key={title} href={`/blog/${slug}`}>
+            <BlogpostCard
+              title={title}
+              description={description}
+              date={date}
+              image={thumbnail}
+              readingTime={readingTime}
+            ></BlogpostCard>
+          </Link>
+        ),
+      )}
+      <SubscribeCard></SubscribeCard>
+    </Main>
+  );
 };
 
 export async function getStaticProps() {
-	let files;
+  let files;
 
-	try {
-		files = fs.readdirSync(`${process.cwd()}/content/blog/posts`);
-	} catch (e) {
-		console.warn(e);
-		return { props: { posts: [] } };
-	}
+  try {
+    files = fs.readdirSync(`${process.cwd()}/content/blog/posts`);
+  } catch (e) {
+    console.warn(e);
+    return { props: { posts: [] } };
+  }
 
-	const posts = files.map((filename) => {
-		let markdownWithMetadata;
-		try {
-			markdownWithMetadata = fs.readFileSync(`content/blog/posts/${filename}`).toString();
-		} catch (e) {
-			console.warn(e);
-			return { props: { posts: [] } };
-		}
+  const posts = files.map((filename) => {
+    let markdownWithMetadata;
+    try {
+      markdownWithMetadata = fs
+        .readFileSync(`content/blog/posts/${filename}`)
+        .toString();
+    } catch (e) {
+      console.warn(e);
+      return { props: { posts: [] } };
+    }
 
-		const { data, content } = matter(markdownWithMetadata);
+    const { data, content } = matter(markdownWithMetadata);
 
-		const timeToRead = readingTime(content);
+    const timeToRead = readingTime(content);
 
-		// Convert post date to format: Month day, Year
-		const options = { year: "numeric", month: "short", day: "numeric" };
-		const formattedDate = data.date.toLocaleDateString("en-US", options);
+    // Convert post date to format: Month day, Year
+    const options = { year: "numeric", month: "short", day: "numeric" };
+    const formattedDate = data.date.toLocaleDateString("en-US", options);
 
-		const frontmatter = {
-			...data,
-			readingTime: timeToRead.text,
-			date: formattedDate,
-		};
+    const frontmatter = {
+      ...data,
+      readingTime: timeToRead.text,
+      date: formattedDate,
+    };
 
-		return {
-			slug: filename.replace(".md", ""),
-			frontmatter,
-		};
-	});
+    return {
+      slug: filename.replace(".md", ""),
+      frontmatter,
+    };
+  });
 
-	return {
-		props: {
-			posts,
-		},
-	};
+  return {
+    props: {
+      posts,
+    },
+  };
 }
 
 export default Blog;

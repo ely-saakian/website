@@ -1,17 +1,17 @@
-import type { NextPage } from 'next';
-import IntroCard from '../components/Homepage/Main/IntroCard';
-import LatestBlogPostCard from '../components/Homepage/Main/LatestBlogPostCard';
-import ProjectCard from '../components/Homepage/Main/ProjectCard';
-import DailyQuoteCard from '../components/Homepage/Main/DailyQuoteCard';
-import Main from '../components/Homepage/Main';
-import Masonry from 'react-masonry-css';
-import SubscribeCard from '../components/Blog/SubscribeCard';
-import fs from 'fs';
-import matter from 'gray-matter';
-import readingTime from 'reading-time';
-import { Project } from './projects';
-import { gql, GraphQLClient } from 'graphql-request';
-import { isEmpty } from 'lodash';
+import type { NextPage } from "next";
+import IntroCard from "../components/Homepage/Main/IntroCard";
+import LatestBlogPostCard from "../components/Homepage/Main/LatestBlogPostCard";
+import ProjectCard from "../components/Homepage/Main/ProjectCard";
+import DailyQuoteCard from "../components/Homepage/Main/DailyQuoteCard";
+import Main from "../components/Homepage/Main";
+import Masonry from "react-masonry-css";
+import SubscribeCard from "../components/Blog/SubscribeCard";
+import fs from "fs";
+import matter from "gray-matter";
+import readingTime from "reading-time";
+import { Project } from "./projects";
+import { gql, GraphQLClient } from "graphql-request";
+import { isEmpty } from "lodash";
 
 interface HomePageProps {
   latestPost: {
@@ -72,21 +72,26 @@ export async function getStaticProps() {
     return data2.date - data1.date;
   })[0];
 
-  const latestPostFile = fs.readFileSync(`content/blog/posts/${latestPostFilename}`).toString();
+  const latestPostFile = fs
+    .readFileSync(`content/blog/posts/${latestPostFilename}`)
+    .toString();
   const latestPostData = matter(latestPostFile);
 
   const timeToRead = readingTime(latestPostData.content).text;
 
-  const slug = latestPostFilename.replace('.md', '');
+  const slug = latestPostFilename.replace(".md", "");
 
-  const reposApi = 'https://api.github.com/users/ely-saakian/repos';
+  const reposApi = "https://api.github.com/users/ely-saakian/repos";
 
   let latestProjectData = {};
   try {
     const response = await fetch(reposApi);
     const reposData = await response.json();
 
-    const latestRepo = reposData.sort((repo1: any, repo2: any) => repo2.updated_at - repo1.updated_at)[0] || {};
+    const latestRepo =
+      reposData.sort(
+        (repo1: any, repo2: any) => repo2.updated_at - repo1.updated_at,
+      )[0] || {};
 
     if (!isEmpty(latestRepo)) {
       const query = gql`
@@ -97,11 +102,14 @@ export async function getStaticProps() {
         }
       `;
 
-      const graphQLClient = new GraphQLClient('https://api.github.com/graphql', {
-        headers: {
-          authorization: 'Bearer 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',
+      const graphQLClient = new GraphQLClient(
+        "https://api.github.com/graphql",
+        {
+          headers: {
+            authorization: "Bearer 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",
+          },
         },
-      });
+      );
 
       const graphQLresponse = await graphQLClient.request(query);
 
@@ -114,7 +122,7 @@ export async function getStaticProps() {
       };
     }
   } catch (error) {
-    console.error('Error getting repos: ', error);
+    console.error("Error getting repos: ", error);
   }
 
   return {

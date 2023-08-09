@@ -4,117 +4,134 @@ import matter from "gray-matter";
 import readingTime from "reading-time";
 import { ParsedUrlQuery } from "querystring";
 import Image from "next/image";
-import marked from "marked";
+import { marked } from "marked";
 import DOMPurify from "isomorphic-dompurify";
 import SubscribeCard from "../../components/Blog/SubscribeCard";
 import { ChevronLeftIcon } from "@heroicons/react/solid";
 import { useRouter } from "next/router";
 
 type BlogPostProps = {
-	post: {
-		content: string;
-		readingTime: string;
-		title: string;
-		thumbnail: string;
-		description: string;
-		date: string;
-	};
+  post: {
+    content: string;
+    readingTime: string;
+    title: string;
+    thumbnail: string;
+    description: string;
+    date: string;
+  };
 };
 
 const BlogPost: React.FC<BlogPostProps> = ({ post }) => {
-	const router = useRouter();
+  const router = useRouter();
 
-	return (
-		<>
-			<div className="px-5">
-				<button className="text-gray-400 inline-flex items-center" onClick={() => router.push("/blog")}>
-					<ChevronLeftIcon className="w-7 h-7 mr-1"></ChevronLeftIcon>
-					<span>Blog</span>
-				</button>
-			</div>
-			<article>
-				<div className="flex flex-col space-y-5 p-10">
-					<h1 className="text-2xl lg:text-4xl font-bold dark:text-white">{post.title}</h1>
-					<p className="text-lg text-gray-500 dark:text-white">{post.description}</p>
-					<p className="font-light italic text-gray-500 dark:text-white">
-						{post.date} · {post.readingTime}
-					</p>
-				</div>
-				<div className="h-[250px] sm:h-[450px] relative">
-					<Image src={"/" + post.thumbnail} alt={post.title} objectFit="cover" layout="fill"></Image>
-				</div>
-				<div className="prose mx-auto p-10 dark:text-white" dangerouslySetInnerHTML={{ __html: post.content }}></div>
-				<SubscribeCard></SubscribeCard>
-			</article>
-		</>
-	);
+  return (
+    <>
+      <div className="px-5">
+        <button
+          className="text-gray-400 inline-flex items-center"
+          onClick={() => router.push("/blog")}
+        >
+          <ChevronLeftIcon className="w-7 h-7 mr-1"></ChevronLeftIcon>
+          <span>Blog</span>
+        </button>
+      </div>
+      <article>
+        <div className="flex flex-col space-y-5 p-10">
+          <h1 className="text-2xl lg:text-4xl font-bold dark:text-white">
+            {post.title}
+          </h1>
+          <p className="text-lg text-gray-500 dark:text-white">
+            {post.description}
+          </p>
+          <p className="font-light italic text-gray-500 dark:text-white">
+            {post.date} · {post.readingTime}
+          </p>
+        </div>
+        <div className="h-[250px] sm:h-[450px] relative">
+          <Image
+            src={"/" + post.thumbnail}
+            alt={post.title}
+            objectFit="cover"
+            layout="fill"
+          ></Image>
+        </div>
+        <div
+          className="prose mx-auto p-10 dark:text-white"
+          dangerouslySetInnerHTML={{ __html: post.content }}
+        ></div>
+        <SubscribeCard></SubscribeCard>
+      </article>
+    </>
+  );
 };
 
 export async function getStaticPaths() {
-	let files;
+  let files;
 
-	try {
-		files = fs.readdirSync(`${process.cwd()}/content/blog/posts`);
-	} catch (e) {
-		console.warn(e);
-		return { paths: [], fallback: false };
-	}
+  try {
+    files = fs.readdirSync(`${process.cwd()}/content/blog/posts`);
+  } catch (e) {
+    console.warn(e);
+    return { paths: [], fallback: false };
+  }
 
-	const paths = files.map((filename) => ({
-		params: {
-			slug: filename.replace(".md", ""),
-		},
-	}));
+  const paths = files.map((filename) => ({
+    params: {
+      slug: filename.replace(".md", ""),
+    },
+  }));
 
-	return {
-		paths,
-		fallback: false,
-	};
+  return {
+    paths,
+    fallback: false,
+  };
 }
 
 interface IGetStaticPropsParams extends ParsedUrlQuery {
-	slug: string;
+  slug: string;
 }
 
 export async function getStaticProps(context: any) {
-	const { slug } = context.params as IGetStaticPropsParams;
-	let markdownWithMetadata = "";
+  const { slug } = context.params as IGetStaticPropsParams;
+  let markdownWithMetadata = "";
 
-	try {
-		markdownWithMetadata = fs.readFileSync(path.join("content/blog/posts", slug + ".md")).toString();
-	} catch (e) {
-		console.warn(e);
-		return { props: {} };
-	}
+  try {
+    markdownWithMetadata = fs
+      .readFileSync(path.join("content/blog/posts", slug + ".md"))
+      .toString();
+  } catch (e) {
+    console.warn(e);
+    return { props: {} };
+  }
 
-	const { data, content } = matter(markdownWithMetadata);
+  const { data, content } = matter(markdownWithMetadata);
 
-	const timeToRead = readingTime(content);
+  const timeToRead = readingTime(content);
 
-	// Convert post date to format: Month day, Year
-	const options = { year: "numeric", month: "short", day: "numeric" };
-	const formattedDate = data.date.toLocaleDateString("en-US", options);
+  // Convert post date to format: Month day, Year
+  const options = { year: "numeric", month: "short", day: "numeric" };
+  const formattedDate = data.date.toLocaleDateString("en-US", options);
 
-	const frontmatter = {
-		title: data.title,
-		thumbnail: data.thumbnail,
-		description: data.description,
-		readingTime: timeToRead.text,
-		date: formattedDate,
-	};
+  const frontmatter = {
+    title: data.title,
+    thumbnail: data.thumbnail,
+    description: data.description,
+    readingTime: timeToRead.text,
+    date: formattedDate,
+  };
 
-	return {
-		props: {
-			post: {
-				content: DOMPurify.sanitize(marked(content)),
-				readingTime: frontmatter.readingTime,
-				title: frontmatter.title,
-				thumbnail: frontmatter.thumbnail,
-				date: frontmatter.date,
-				description: frontmatter.description,
-			},
-		},
-	};
+  return {
+    props: {
+      post: {
+        content: DOMPurify.sanitize(marked(content)),
+        readingTime: frontmatter.readingTime,
+        title: frontmatter.title,
+        thumbnail: frontmatter.thumbnail,
+        date: frontmatter.date,
+        description: frontmatter.description,
+      },
+    },
+  };
 }
 
 export default BlogPost;
