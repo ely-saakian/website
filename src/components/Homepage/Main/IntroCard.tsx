@@ -12,7 +12,7 @@ const IntroCard = () => {
       <p className="text-gray-500 dark:text-white">
         Currently a software engineer at Amazon. With my passion for coding I’m
         here to share the things I learn along my path to being the best at what
-        I do. Also feel free to hit me up for your projects. Cheers!
+        I do. Cheers!
       </p>
     </article>
   );
