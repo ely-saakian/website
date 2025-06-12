@@ -6,13 +6,21 @@ const IntroCard = () => {
       <div className="flex items-center space-x-5">
         <AvatarMeIcon></AvatarMeIcon>
         <h1 className="text-2xl font-medium text-dark dark:text-white">
-          Hey, I’m Ely and I am a full-stack developer.
+          Hey, I&apos;m Ely and I&apos;m a full-stack developer.
         </h1>
       </div>
       <p className="text-gray-500 dark:text-white">
-        Currently a software engineer at Amazon. With my passion for coding I’m
-        here to share the things I learn along my path to being the best at what
-        I do. Cheers!
+        Super passionate about building products that make people&apos;s lives
+        better. Here I&apos;m hoping to share useful things I&apos;ve learned
+        along the way.
+      </p>
+      <p className="text-gray-500 dark:text-white">
+        Currently building my first mobile app with React Native and Expo
+        outside of my day job.
+      </p>
+      <p className="text-gray-500 dark:text-white">
+        If lifting weights and writing code excites you as much as it does me,
+        then feel free to stick around by subscribing below. Cheers!
       </p>
     </article>
   );
