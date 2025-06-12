@@ -56,7 +56,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ post }) => {
           ></Image>
         </div>
         <div
-          className="prose mx-auto p-10 dark:text-white"
+          className="prose dark:prose-invert mx-auto p-10"
           dangerouslySetInnerHTML={{ __html: post.content }}
         ></div>
         <SubscribeCard></SubscribeCard>
