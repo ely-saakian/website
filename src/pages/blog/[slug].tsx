@@ -6,6 +6,7 @@ import { ParsedUrlQuery } from "querystring";
 import Image from "next/image";
 import { marked } from "marked";
 import DOMPurify from "isomorphic-dompurify";
+import Head from "next/head";
 import SubscribeCard from "../../components/Blog/SubscribeCard";
 import { ChevronLeftIcon } from "@heroicons/react/solid";
 import { useRouter } from "next/router";
@@ -18,14 +19,56 @@ type BlogPostProps = {
     thumbnail: string;
     description: string;
     date: string;
+    slug: string;
   };
 };
 
 const BlogPost: React.FC<BlogPostProps> = ({ post }) => {
   const router = useRouter();
 
+  // Construct the full URL for the blog post
+  const baseUrl = "https://elysaakian.com";
+  const postUrl = `${baseUrl}/blog/${post.slug}`;
+  const imageUrl = `${baseUrl}/${post.thumbnail}`;
+
   return (
     <>
+      <Head>
+        {/* Primary Meta Tags */}
+        <title>{post.title} | Ely Saakian</title>
+        <meta name="title" content={`${post.title} | Ely Saakian`} />
+        <meta name="description" content={post.description} />
+
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content={postUrl} />
+        <meta property="og:title" content={post.title} />
+        <meta property="og:description" content={post.description} />
+        <meta property="og:image" content={imageUrl} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content={post.title} />
+        <meta property="og:site_name" content="Ely Saakian - Developer" />
+        <meta
+          property="article:published_time"
+          content={new Date(post.date).toISOString()}
+        />
+        <meta property="article:author" content="Ely Saakian" />
+
+        {/* Twitter */}
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content={postUrl} />
+        <meta property="twitter:title" content={post.title} />
+        <meta property="twitter:description" content={post.description} />
+        <meta property="twitter:image" content={imageUrl} />
+        <meta property="twitter:image:alt" content={post.title} />
+
+        {/* Additional SEO */}
+        <meta name="robots" content="index, follow" />
+        <meta name="author" content="Ely Saakian" />
+        <link rel="canonical" href={postUrl} />
+      </Head>
+
       <div className="px-5">
         <button
           className="text-gray-400 inline-flex items-center"
@@ -129,6 +172,7 @@ export async function getStaticProps(context: any) {
         thumbnail: frontmatter.thumbnail,
         date: frontmatter.date,
         description: frontmatter.description,
+        slug: slug,
       },
     },
   };
