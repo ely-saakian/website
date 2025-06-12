@@ -14,7 +14,7 @@ const Footer = () => {
         , deployed on{" "}
         <a
           className="underline"
-          href="https://vercel.com/mailbrew"
+          href="https://vercel.com/"
           rel="noreferrer"
           target="_blank"
         >
