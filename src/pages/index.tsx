@@ -12,6 +12,7 @@ import readingTime from "reading-time";
 import { Project } from "./projects";
 import { gql, GraphQLClient } from "graphql-request";
 import { isEmpty } from "lodash";
+import ProduceMoreThanConsumeCard from "../components/ProduceMoreThanConsumeCard";
 
 interface HomePageProps {
   latestPost: {
@@ -37,6 +38,7 @@ const Home: NextPage<HomePageProps> = ({ latestPost, latestProject }) => {
       >
         <IntroCard></IntroCard>
         <LatestBlogPostCard latestPost={latestPost}></LatestBlogPostCard>
+        <ProduceMoreThanConsumeCard></ProduceMoreThanConsumeCard>
         <ProjectCard latestProject project={latestProject}></ProjectCard>
         <DailyQuoteCard></DailyQuoteCard>
         <SubscribeCard></SubscribeCard>
