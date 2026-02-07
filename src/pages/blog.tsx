@@ -1,6 +1,5 @@
 import Main from "../components/Blog/Main";
 import BlogpostCard from "../components/Blog/BlogpostCard";
-import SubscribeCard from "../components/Blog/SubscribeCard";
 import fs from "fs";
 import matter from "gray-matter";
 import readingTime from "reading-time";
@@ -25,7 +24,6 @@ const Blog = ({ posts }: { posts: any[] }) => {
           </Link>
         ),
       )}
-      <SubscribeCard></SubscribeCard>
     </Main>
   );
 };

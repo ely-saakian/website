@@ -5,29 +5,25 @@ import ProjectCard from "../components/Homepage/Main/ProjectCard";
 import DailyQuoteCard from "../components/Homepage/Main/DailyQuoteCard";
 import Main from "../components/Homepage/Main";
 import Masonry from "react-masonry-css";
-import SubscribeCard from "../components/Blog/SubscribeCard";
 import fs from "fs";
 import matter from "gray-matter";
 import readingTime from "reading-time";
 import { Project } from "./projects";
 import { gql, GraphQLClient } from "graphql-request";
 import { isEmpty } from "lodash";
-import ProduceMoreThanConsumeCard from "../components/ProduceMoreThanConsumeCard";
 
 interface HomePageProps {
   latestPost: {
     latestPostData: matter.GrayMatterFile<string>;
     timeToRead: string;
     slug: string;
-  };
+  } | null;
   latestProject: Project;
 }
 
 const Home: NextPage<HomePageProps> = ({ latestPost, latestProject }) => {
-  const breakpointColumnsObj = {
-    default: 2,
-    768: 1,
-  };
+  const breakpointColumnsObj = { default: 2, 768: 1 };
+  const hasLatestContent = latestPost || !isEmpty(latestProject);
 
   return (
     <Main>
@@ -36,52 +32,67 @@ const Home: NextPage<HomePageProps> = ({ latestPost, latestProject }) => {
         className="my-masonry-grid flex space-x-10"
         columnClassName="my-masonry-grid_column space-y-10"
       >
-        <IntroCard></IntroCard>
-        <LatestBlogPostCard latestPost={latestPost}></LatestBlogPostCard>
-        <ProduceMoreThanConsumeCard></ProduceMoreThanConsumeCard>
-        <ProjectCard latestProject project={latestProject}></ProjectCard>
-        <DailyQuoteCard></DailyQuoteCard>
-        <SubscribeCard></SubscribeCard>
+        <IntroCard />
+        {!hasLatestContent && <DailyQuoteCard />}
+        {latestPost && <LatestBlogPostCard latestPost={latestPost} />}
+        {!isEmpty(latestProject) && (
+          <ProjectCard latestProject project={latestProject} />
+        )}
+        {hasLatestContent && <DailyQuoteCard />}
       </Masonry>
     </Main>
   );
 };
 
 export async function getStaticProps() {
-  let files;
+  let files: string[] = [];
 
   try {
     files = fs.readdirSync(`${process.cwd()}/content/blog/posts`);
   } catch (e) {
     console.warn(e);
-    return { props: {} };
+    files = [];
   }
 
-  const latestPostFilename = files.sort((f1, f2) => {
-    let f1WithMetadata;
-    let f2WithMetadata;
-    try {
-      f1WithMetadata = fs.readFileSync(`content/blog/posts/${f1}`).toString();
-      f2WithMetadata = fs.readFileSync(`content/blog/posts/${f2}`).toString();
-    } catch (e) {
-      console.warn(e);
-      return 0;
-    }
+  let latestPostResult = null;
 
-    const data1 = matter(f1WithMetadata).data;
-    const data2 = matter(f2WithMetadata).data;
+  if (files.length > 0) {
+    const latestPostFilename = files.sort((f1, f2) => {
+      let f1WithMetadata;
+      let f2WithMetadata;
+      try {
+        f1WithMetadata = fs.readFileSync(`content/blog/posts/${f1}`).toString();
+        f2WithMetadata = fs.readFileSync(`content/blog/posts/${f2}`).toString();
+      } catch (e) {
+        console.warn(e);
+        return 0;
+      }
 
-    return data2.date - data1.date;
-  })[0];
+      const data1 = matter(f1WithMetadata).data;
+      const data2 = matter(f2WithMetadata).data;
 
-  const latestPostFile = fs
-    .readFileSync(`content/blog/posts/${latestPostFilename}`)
-    .toString();
-  const latestPostData = matter(latestPostFile);
+      return data2.date - data1.date;
+    })[0];
 
-  const timeToRead = readingTime(latestPostData.content).text;
+    const latestPostFile = fs
+      .readFileSync(`content/blog/posts/${latestPostFilename}`)
+      .toString();
+    const latestPostData = matter(latestPostFile);
 
-  const slug = latestPostFilename.replace(".md", "");
+    const timeToRead = readingTime(latestPostData.content).text;
+    const slug = latestPostFilename.replace(".md", "");
+
+    latestPostResult = {
+      latestPostData: {
+        data: {
+          ...latestPostData.data,
+          date: new Date(latestPostData.data.date).toString(),
+        },
+      },
+      timeToRead,
+      slug,
+    };
+  }
 
   const reposApi = "https://api.github.com/users/ely-saakian/repos";
 
@@ -128,19 +139,7 @@ export async function getStaticProps() {
   }
 
   return {
-    props: {
-      latestPost: {
-        latestPostData: {
-          data: {
-            ...latestPostData.data,
-            date: new Date(latestPostData.data.date).toString(),
-          },
-        },
-        timeToRead,
-        slug,
-      },
-      latestProject: latestProjectData,
-    },
+    props: { latestPost: latestPostResult, latestProject: latestProjectData },
   };
 }
 

@@ -20,7 +20,7 @@ const IntroCard = () => {
       </p>
       <p className="text-gray-500 dark:text-white">
         If lifting weights and writing code excites you as much as it does me,
-        then feel free to stick around by subscribing below. Cheers!
+        then feel free to stick around and explore. Cheers!
       </p>
     </article>
   );

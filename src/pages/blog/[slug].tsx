@@ -7,7 +7,6 @@ import Image from "next/image";
 import { marked } from "marked";
 import DOMPurify from "isomorphic-dompurify";
 import Head from "next/head";
-import SubscribeCard from "../../components/Blog/SubscribeCard";
 import { ChevronLeftIcon } from "@heroicons/react/solid";
 import { useRouter } from "next/router";
 
@@ -103,7 +102,6 @@ const BlogPost: React.FC<BlogPostProps> = ({ post }) => {
           className="prose dark:prose-invert mx-auto p-10"
           dangerouslySetInnerHTML={{ __html: post.content }}
         ></div>
-        <SubscribeCard></SubscribeCard>
       </article>
     </>
   );
