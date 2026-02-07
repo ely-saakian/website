@@ -15,10 +15,6 @@ const IntroCard = () => {
         along the way.
       </p>
       <p className="text-gray-500 dark:text-white">
-        Currently building my first mobile app with React Native and Expo
-        outside of my day job.
-      </p>
-      <p className="text-gray-500 dark:text-white">
         If lifting weights and writing code excites you as much as it does me,
         then feel free to stick around and explore. Cheers!
       </p>
