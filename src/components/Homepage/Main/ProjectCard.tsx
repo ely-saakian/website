@@ -30,9 +30,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           <Image
             src={project.imageUrl}
             alt="Weather app powered by Open Weather API Image"
-            layout="fill"
-            objectFit="cover"
-          ></Image>
+            fill
+            sizes="(max-width: 768px) 100vw, 400px"
+            className="object-cover"
+          />
         </div>
         <div className="flex flex-col p-10 space-y-5">
           <h2 className="text-2xl font-medium dark:text-white">

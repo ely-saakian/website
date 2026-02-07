@@ -14,9 +14,10 @@ const ReadingNowCard = () => {
             <Image
               src="/images/reading_now_image.png"
               alt="The Hard Thing About Hard Things Book Cover"
-              layout="fill"
-              objectFit="contain"
-            ></Image>
+              fill
+              sizes="200px"
+              className="object-contain"
+            />
           </div>
           <p className="font-light italic text-gray-500 dark:text-white">
             Ben Horowitz

@@ -16,7 +16,7 @@ const SubscribeCard = () => {
       .then((result) => {
         if (result.status === 200) {
           toast.success(result.data.message, {
-            position: toast.POSITION.BOTTOM_RIGHT,
+            position: "bottom-right",
           });
           setEmail("");
           setLoading(false);
@@ -24,7 +24,7 @@ const SubscribeCard = () => {
       })
       .catch((err) => {
         toast.error("Something went wrong. Please try again later.", {
-          position: toast.POSITION.BOTTOM_RIGHT,
+          position: "bottom-right",
         });
         setLoading(false);
       });

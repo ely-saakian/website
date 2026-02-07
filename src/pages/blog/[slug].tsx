@@ -94,9 +94,10 @@ const BlogPost: React.FC<BlogPostProps> = ({ post }) => {
           <Image
             src={"/" + post.thumbnail}
             alt={post.title}
-            objectFit="cover"
-            layout="fill"
-          ></Image>
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 1024px"
+            className="object-cover"
+          />
         </div>
         <div
           className="prose dark:prose-invert mx-auto p-10"

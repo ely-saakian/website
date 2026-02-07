@@ -21,10 +21,10 @@ const BlogpostCard = ({
         <Image
           src={"/" + image}
           alt="Blog post images"
-          layout="fill"
-          objectFit="cover"
-          className="rounded-t-xl md:rounded-l-xl md:rounded-tr-none"
-        ></Image>
+          fill
+          sizes="(max-width: 768px) 100vw, 300px"
+          className="rounded-t-xl md:rounded-l-xl md:rounded-tr-none object-cover"
+        />
       </div>
       <div className="flex flex-col space-y-5 p-10">
         <h2 className="text-2xl font-medium dark:text-white">{title}</h2>

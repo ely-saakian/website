@@ -39,9 +39,10 @@ const LatestBlogPostCard: React.FC<LatestBlogPostCardProps> = ({
           <Image
             src={"/" + latestPost.latestPostData.data.thumbnail}
             alt="Latest Blog Post Image"
-            layout="fill"
-            objectFit="cover"
-          ></Image>
+            fill
+            sizes="(max-width: 768px) 100vw, 400px"
+            className="object-cover"
+          />
         </div>
         <div className="flex flex-col p-10 space-y-5">
           <h2 className="text-2xl font-medium dark:text-white">

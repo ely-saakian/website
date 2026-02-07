@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
   reactStrictMode: true,
+  turbopack: {},
   webpack: (cfg) => {
     cfg.module.rules.push({
       test: /\.md$/,
@@ -10,7 +11,12 @@ module.exports = {
     return cfg;
   },
   images: {
-    domains: ["repository-images.githubusercontent.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "repository-images.githubusercontent.com",
+      },
+    ],
   },
   trailingSlash: true,
 };
