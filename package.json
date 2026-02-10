@@ -11,8 +11,6 @@
   },
   "dependencies": {
     "@heroicons/react": "^1.0.4",
-    "@openlab/vercel-netlify-cms-github": "^1.1.1",
-    "cors": "^2.8.5",
     "date-fns": "^2.24.0",
     "graphql-request": "^3.5.0",
     "isomorphic-dompurify": "^3.0.0-rc.2",
@@ -30,7 +28,6 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.10",
     "@tailwindcss/typography": "^0.5.16",
-    "@types/cors": "^2.8.12",
     "@types/lodash": "^4.14.185",
     "@types/marked": "^5.0.1",
     "@types/react": "^18.2.0",

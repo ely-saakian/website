@@ -22,9 +22,7 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx",
-    "src/pages/api/callback.ts",
-    "src/pages/api/auth.ts"
+    "**/*.tsx"
   ],
   "exclude": [
     "node_modules"
