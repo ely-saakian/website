@@ -1,3 +1,5 @@
+"use client";
+
 import { useContext } from "react";
 import { useSpinDelay } from "spin-delay";
 import { QuoteContext } from "../../../store/QuoteContextProvider";

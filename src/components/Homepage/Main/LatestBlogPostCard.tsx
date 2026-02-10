@@ -1,12 +1,21 @@
+"use client";
+
 import Image from "next/image";
-import matter from "gray-matter";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { formatDistanceToNow } from "date-fns";
 import { isEmpty } from "lodash";
 
 interface LatestBlogPostCardProps {
   latestPost: {
-    latestPostData: matter.GrayMatterFile<string>;
+    latestPostData: {
+      data: {
+        title?: string;
+        description?: string;
+        date?: string;
+        thumbnail?: string;
+        [key: string]: unknown;
+      };
+    };
     timeToRead: string;
     slug: string;
   };
@@ -30,7 +39,7 @@ const LatestBlogPostCard: React.FC<LatestBlogPostCardProps> = ({
           <p className="font-light dark:text-white">Latest blog post</p>
           <p className="font-light italic text-gray-500 dark:text-white">
             {formatDistanceToNow(
-              new Date(latestPost.latestPostData.data.date),
+              new Date(latestPost.latestPostData.data.date as string),
               { addSuffix: true },
             )}
           </p>

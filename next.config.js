@@ -2,6 +2,9 @@
 module.exports = {
   reactStrictMode: true,
   turbopack: {},
+  experimental: {
+    viewTransition: true,
+  },
   images: {
     remotePatterns: [
       {

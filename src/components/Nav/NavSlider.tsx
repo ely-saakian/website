@@ -1,3 +1,5 @@
+"use client";
+
 import { useSpring, animated, config } from "react-spring";
 
 export type TabSliderStyles = {
@@ -14,11 +16,13 @@ const NavSlider = ({ sliderStyles }: { sliderStyles?: TabSliderStyles }) => {
     config: { ...config.stiff, velocity: 0.006 },
   });
 
+  const AnimatedDiv = animated.div as any;
+
   return (
-    <animated.div
+    <AnimatedDiv
       className="absolute bg-white dark:bg-gray-600 rounded-full z-[-1]"
       style={styles}
-    ></animated.div>
+    />
   );
 };
 
