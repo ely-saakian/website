@@ -19,6 +19,8 @@ const Nav = () => {
   };
 
   useEffect(() => {
+    if (!pathname) return;
+
     const routesTabRefMap: RoutesTabRefMap = {
       "/": homeTabRef,
       "/blog": blogTabRef,
