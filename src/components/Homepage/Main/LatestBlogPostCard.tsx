@@ -46,7 +46,10 @@ const LatestBlogPostCard: React.FC<LatestBlogPostCardProps> = ({
         </div>
         <div className="h-[200px] relative">
           <Image
-            src={"/" + latestPost.latestPostData.data.thumbnail}
+            src={
+              latestPost.latestPostData.data.thumbnail ??
+              "/images/latest_blogpost_sample_image.png"
+            }
             alt="Latest Blog Post Image"
             fill
             sizes="(max-width: 768px) 100vw, 400px"

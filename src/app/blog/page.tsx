@@ -1,55 +1,48 @@
-import fs from "fs";
-import matter from "gray-matter";
 import readingTime from "reading-time";
 import Link from "next/link";
+import client from "../../../tina/__generated__/client";
 import Main from "../../components/Blog/Main";
 import BlogpostCard from "../../components/Blog/BlogpostCard";
 
 async function getBlogPosts() {
-  let files;
-
   try {
-    files = fs.readdirSync(`${process.cwd()}/content/blog/posts`);
-  } catch (e) {
-    console.warn(e);
+    const postsResponse = await client.queries.postConnection({
+      sort: "date",
+    });
+
+    const posts =
+      postsResponse.data?.postConnection?.edges?.map((edge) => {
+        const node = edge?.node;
+        if (!node) return null;
+
+        const bodyString = JSON.stringify(node.body);
+        const timeToRead = readingTime(bodyString).text;
+
+        const formattedDate = node.date
+          ? new Date(node.date).toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+            })
+          : null;
+
+        return {
+          slug: node._sys.filename,
+          frontmatter: {
+            title: node.title,
+            description: node.description,
+            date: formattedDate,
+            thumbnail: node.thumbnail,
+            readingTime: timeToRead,
+          },
+        };
+      }) ?? [];
+
+    return posts.filter(Boolean);
+  } catch (error) {
+    console.error("Error fetching posts from Tina:", error);
     return [];
   }
-
-  const posts = files.map((filename) => {
-    let markdownWithMetadata;
-    try {
-      markdownWithMetadata = fs
-        .readFileSync(`content/blog/posts/${filename}`)
-        .toString();
-    } catch (e) {
-      console.warn(e);
-      return null;
-    }
-
-    const { data, content } = matter(markdownWithMetadata);
-
-    const timeToRead = readingTime(content);
-
-    const options: Intl.DateTimeFormatOptions = {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    };
-    const formattedDate = data.date.toLocaleDateString("en-US", options);
-
-    const frontmatter = {
-      ...data,
-      readingTime: timeToRead.text,
-      date: formattedDate,
-    };
-
-    return {
-      slug: filename.replace(".md", ""),
-      frontmatter,
-    };
-  });
-
-  return posts.filter(Boolean);
 }
 
 export default async function Blog() {

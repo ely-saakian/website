@@ -19,7 +19,7 @@ const BlogpostCard = ({
     <article className="flex flex-col md:flex-row rounded-xl shadow-lg dark:bg-gray-700">
       <div className="h-[200px] md:h-auto md:w-[300px] bg-blue-200 rounded-t-xl relative md:rounded-tr-none md:rounded-l-xl">
         <Image
-          src={"/" + image}
+          src={image}
           alt="Blog post images"
           fill
           sizes="(max-width: 768px) 100vw, 300px"

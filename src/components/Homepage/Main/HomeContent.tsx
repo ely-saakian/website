@@ -3,10 +3,7 @@
 import Masonry from "react-masonry-css";
 import IntroCard from "./IntroCard";
 import LatestBlogPostCard from "./LatestBlogPostCard";
-import ProjectCard from "./ProjectCard";
 import DailyQuoteCard from "./DailyQuoteCard";
-import { isEmpty } from "lodash";
-import { Project } from "../../../types/project";
 
 interface HomeContentProps {
   latestPost: {
@@ -22,12 +19,10 @@ interface HomeContentProps {
     timeToRead: string;
     slug: string;
   } | null;
-  latestProject: Project;
 }
 
-export function HomeContent({ latestPost, latestProject }: HomeContentProps) {
+export function HomeContent({ latestPost }: HomeContentProps) {
   const breakpointColumnsObj = { default: 2, 768: 1 };
-  const hasLatestContent = latestPost || !isEmpty(latestProject);
 
   return (
     <Masonry
@@ -36,12 +31,9 @@ export function HomeContent({ latestPost, latestProject }: HomeContentProps) {
       columnClassName="my-masonry-grid_column space-y-10"
     >
       <IntroCard />
-      {!hasLatestContent && <DailyQuoteCard />}
+      {!latestPost && <DailyQuoteCard />}
       {latestPost && <LatestBlogPostCard latestPost={latestPost} />}
-      {!isEmpty(latestProject) && (
-        <ProjectCard latestProject project={latestProject} />
-      )}
-      {hasLatestContent && <DailyQuoteCard />}
+      {latestPost && <DailyQuoteCard />}
     </Masonry>
   );
 }
