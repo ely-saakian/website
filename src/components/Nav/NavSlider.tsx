@@ -1,6 +1,6 @@
 "use client";
 
-import { useSpring, animated, config } from "react-spring";
+import { useSpring, animated, config } from "@react-spring/web";
 
 export type TabSliderStyles = {
   height: number;
