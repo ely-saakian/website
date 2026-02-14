@@ -1,7 +1,7 @@
 import readingTime from "reading-time";
-import client from "../../tina/__generated__/client";
-import Main from "../components/Homepage/Main";
-import { HomeContent } from "../components/Homepage/Main/HomeContent";
+import client from "@tina/__generated__/client";
+import Main from "@/components/Homepage/Main";
+import { HomeContent } from "@/components/Homepage/Main/HomeContent";
 
 async function getHomeData() {
   let latestPostResult = null;

@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useEffect, useState } from "react";
-import { getCachedData, cacheData } from "../utils/localStorage";
+import { getCachedData, cacheData } from "@/utils/localStorage";
 
 interface Quote {
   author: string;

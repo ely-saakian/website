@@ -1,7 +1,7 @@
 import { formatDistanceToNow } from "date-fns";
 import { isEmpty } from "lodash";
 import Image from "next/image";
-import { Project } from "../../../types/project";
+import { Project } from "@/types/project";
 import ArrowIconBtn from "./ArrowIconBtn";
 
 interface ProjectCardProps {

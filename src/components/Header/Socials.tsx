@@ -1,6 +1,6 @@
 import { MailIcon } from "@heroicons/react/outline";
-import LinkedInIcon from "../../components/icons/LinkedInIcon";
-import GitHubIcon from "../../components/icons/GitHubIcon";
+import LinkedInIcon from "@/components/icons/LinkedInIcon";
+import GitHubIcon from "@/components/icons/GitHubIcon";
 
 const Socials = () => {
   return (

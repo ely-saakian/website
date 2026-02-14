@@ -1,4 +1,4 @@
-import AvatarMeIcon from "../../icons/AvatarMeIcon";
+import AvatarMeIcon from "@/components/icons/AvatarMeIcon";
 
 const IntroCard = () => {
   return (

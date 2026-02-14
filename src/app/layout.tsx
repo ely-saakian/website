@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { ViewTransition } from "react";
-import "../styles/index.css";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import { Providers } from "../components/Providers";
+import "@/styles/index.css";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import { Providers } from "@/components/Providers";
 
 export const metadata: Metadata = {
   title: "Ely Saakian - Developer",

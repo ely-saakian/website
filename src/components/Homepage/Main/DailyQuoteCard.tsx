@@ -2,7 +2,7 @@
 
 import { useContext } from "react";
 import { useSpinDelay } from "spin-delay";
-import { QuoteContext } from "../../../store/QuoteContextProvider";
+import { QuoteContext } from "@/store/QuoteContextProvider";
 
 function SkeletonLine({ className }: { className?: string }) {
   return (

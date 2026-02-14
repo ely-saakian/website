@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import readingTime from "reading-time";
-import client from "../../../../../tina/__generated__/client";
+import client from "@tina/__generated__/client";
 import ClientPost from "../client-page";
 
 export const metadata = {

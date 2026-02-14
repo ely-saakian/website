@@ -1,6 +1,6 @@
 import Socials from "./Socials";
 import Link from "next/link";
-import Nav from "../Nav/index";
+import Nav from "@/components/Nav/index";
 
 const Header = () => {
   return (

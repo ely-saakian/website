@@ -1,8 +1,8 @@
 import readingTime from "reading-time";
 import Link from "next/link";
-import client from "../../../tina/__generated__/client";
-import Main from "../../components/Blog/Main";
-import BlogpostCard from "../../components/Blog/BlogpostCard";
+import client from "@tina/__generated__/client";
+import Main from "@/components/Blog/Main";
+import BlogpostCard from "@/components/Blog/BlogpostCard";
 
 async function getBlogPosts() {
   try {
