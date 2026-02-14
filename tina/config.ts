@@ -67,7 +67,7 @@ export default defineConfig({
           },
         ],
         ui: {
-          router: ({ document }) => `/blog/${document._sys.filename}`,
+          router: ({ document }) => `/blog/${document._sys.filename}/preview`,
         },
       },
     ],

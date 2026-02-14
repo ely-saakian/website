@@ -1,8 +1,10 @@
 import readingTime from "reading-time";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Image from "next/image";
+import { StaticTinaMarkdown } from "tinacms/dist/rich-text/static";
 import client from "../../../../tina/__generated__/client";
-import ClientPost from "./client-page";
+import { BackButton } from "../../../components/Blog/BackButton";
 
 interface BlogPostParams {
   params: Promise<{ slug: string }>;
@@ -84,15 +86,52 @@ export default async function BlogPost({ params }: BlogPostParams) {
     notFound();
   }
 
-  const contentString = JSON.stringify(data.data.post.body);
-  const stats = readingTime(contentString);
+  const post = data.data.post;
+  const stats = readingTime(JSON.stringify(post.body));
+  const formattedDate = post.date
+    ? new Date(post.date).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      })
+    : null;
 
   return (
-    <ClientPost
-      query={data.query}
-      variables={data.variables}
-      data={data.data}
-      readingTime={stats.text}
-    />
+    <>
+      <BackButton />
+      <article>
+        <div className="flex flex-col space-y-5 p-10">
+          <h1 className="text-2xl lg:text-4xl font-bold dark:text-white">
+            {post.title}
+          </h1>
+          {post.description && (
+            <p className="text-lg text-gray-500 dark:text-white">
+              {post.description}
+            </p>
+          )}
+          {(formattedDate || stats.text) && (
+            <p className="font-light italic text-gray-500 dark:text-white">
+              {formattedDate}
+              {formattedDate && stats.text ? " · " : ""}
+              {stats.text}
+            </p>
+          )}
+        </div>
+        {post.thumbnail && (
+          <div className="h-[250px] sm:h-[450px] relative">
+            <Image
+              src={post.thumbnail}
+              alt={post.title}
+              fill
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 1024px"
+              className="object-cover"
+            />
+          </div>
+        )}
+        <div className="prose dark:prose-invert mx-auto p-10">
+          {post.body && <StaticTinaMarkdown content={post.body} />}
+        </div>
+      </article>
+    </>
   );
 }
