@@ -30,11 +30,15 @@ const Nav = () => {
 
     const ref = routesTabRefMap["/" + pathname.split("/")[1]];
 
-    setSliderStyles({
-      height: ref.current?.offsetHeight || 0,
-      width: ref.current?.offsetWidth || 0,
-      left: ref.current?.offsetLeft || 0,
+    const frameId = requestAnimationFrame(() => {
+      setSliderStyles({
+        height: ref.current?.offsetHeight || 0,
+        width: ref.current?.offsetWidth || 0,
+        left: ref.current?.offsetLeft || 0,
+      });
     });
+
+    return () => cancelAnimationFrame(frameId);
   }, [pathname]);
 
   const selectTabHandler = (

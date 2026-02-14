@@ -6,7 +6,7 @@
     "dev": "TINA_PUBLIC_IS_LOCAL=true tinacms dev -c \"next dev\"",
     "build": "tinacms build && next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint src/",
     "export": "npm run build && next export"
   },
   "dependencies": {
@@ -30,8 +30,8 @@
     "@types/node": "^25.2.3",
     "@types/react": "^19.2.13",
     "autoprefixer": "^10.4.21",
-    "eslint": "7.32.0",
-    "eslint-config-next": "^13.4.13",
+    "eslint": "^9.0.0",
+    "eslint-config-next": "^16.1.6",
     "postcss": "^8.5.5",
     "prettier": "^3.0.1",
     "tailwindcss": "^4.1.10",

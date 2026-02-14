@@ -95,7 +95,6 @@ export default async function Image({
           alignItems: "center",
         }}
       >
-        {/* eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text */}
         <img
           src="https://elysaakian.com/avatar.png"
           width={204}
