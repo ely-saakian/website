@@ -27,7 +27,7 @@ async function getHomeData() {
             date: latestEdge.date
               ? new Date(latestEdge.date).toString()
               : undefined,
-            thumbnail: latestEdge.thumbnail ?? undefined,
+            series: (latestEdge as any).series ?? undefined,
           },
         },
         timeToRead,

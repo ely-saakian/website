@@ -1,11 +1,11 @@
-import Image from "next/image";
 import { BackButton } from "./BackButton";
+import { BlogPostCover } from "./BlogPostCover";
 
 interface ArticleLayoutProps {
   title: string;
   description?: string | null;
   date?: string | null;
-  thumbnail?: string | null;
+  seriesTitle?: string | null;
   readingTime?: string;
   children: React.ReactNode;
 }
@@ -14,7 +14,7 @@ export function ArticleLayout({
   title,
   description,
   date,
-  thumbnail,
+  seriesTitle,
   readingTime,
   children,
 }: ArticleLayoutProps) {
@@ -30,15 +30,10 @@ export function ArticleLayout({
     <>
       <BackButton />
       <article>
-        <div className="flex flex-col space-y-5 p-10">
-          <h1 className="text-2xl lg:text-4xl font-bold dark:text-white">
-            {title}
-          </h1>
-          {description && (
-            <p className="text-lg text-gray-500 dark:text-white">
-              {description}
-            </p>
-          )}
+        {seriesTitle && (
+          <BlogPostCover seriesTitle={seriesTitle} articleTitle={title} />
+        )}
+        <div className="prose dark:prose-invert mx-auto py-10 px-10 sm:px-0">
           {(formattedDate || readingTime) && (
             <p className="font-light italic text-gray-500 dark:text-white">
               {formattedDate}
@@ -47,18 +42,10 @@ export function ArticleLayout({
             </p>
           )}
         </div>
-        {thumbnail && (
-          <div className="h-[250px] sm:h-[450px] relative">
-            <Image
-              src={thumbnail}
-              alt={title}
-              fill
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 1024px"
-              className="object-cover"
-            />
-          </div>
-        )}
-        <div className="prose dark:prose-invert mx-auto p-10">{children}</div>
+
+        <div className="prose dark:prose-invert mx-auto px-10 sm:px-0">
+          {children}
+        </div>
       </article>
     </>
   );

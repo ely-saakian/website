@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { formatDistanceToNow } from "date-fns";
 import { isEmpty } from "lodash";
+import { BlogPostCover } from "@/components/Blog/BlogPostCover";
 
 interface LatestBlogPostCardProps {
   latestPost: {
@@ -12,7 +12,7 @@ interface LatestBlogPostCardProps {
         title?: string;
         description?: string;
         date?: string;
-        thumbnail?: string;
+        series?: string;
         [key: string]: unknown;
       };
     };
@@ -44,22 +44,12 @@ const LatestBlogPostCard: React.FC<LatestBlogPostCardProps> = ({
             )}
           </p>
         </div>
-        <div className="h-[200px] relative">
-          <Image
-            src={
-              latestPost.latestPostData.data.thumbnail ??
-              "/images/latest_blogpost_sample_image.png"
-            }
-            alt="Latest Blog Post Image"
-            fill
-            sizes="(max-width: 768px) 100vw, 400px"
-            className="object-cover"
-          />
-        </div>
-        <div className="flex flex-col p-10 space-y-5">
-          <h2 className="text-2xl font-medium dark:text-white">
-            {latestPost.latestPostData.data.title}
-          </h2>
+        <BlogPostCover
+          seriesTitle={latestPost.latestPostData.data.series ?? ""}
+          articleTitle={latestPost.latestPostData.data.title ?? ""}
+          small
+        />
+        <div className="flex flex-col pb-10 px-10 space-y-5">
           <p className="text-gray-500 dark:text-white">
             {latestPost.latestPostData.data.description}
           </p>

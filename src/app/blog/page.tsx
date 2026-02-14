@@ -32,7 +32,7 @@ async function getBlogPosts() {
             title: node.title,
             description: node.description,
             date: formattedDate,
-            thumbnail: node.thumbnail,
+            series: (node as any).series ?? null,
             readingTime: timeToRead,
           },
         };
@@ -56,7 +56,7 @@ export default async function Blog() {
             title={post.frontmatter.title}
             description={post.frontmatter.description}
             date={post.frontmatter.date}
-            image={post.frontmatter.thumbnail}
+            seriesTitle={post.frontmatter.series ?? ""}
             readingTime={post.frontmatter.readingTime}
           />
         </Link>

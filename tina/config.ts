@@ -53,10 +53,10 @@ export default defineConfig({
             required: true,
           },
           {
-            type: "image",
-            name: "thumbnail",
-            label: "Thumbnail",
-            required: true,
+            type: "string",
+            name: "series",
+            label: "Series",
+            required: false,
           },
           {
             type: "rich-text",

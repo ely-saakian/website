@@ -36,35 +36,15 @@ export async function generateMetadata({
   const post = data.data.post;
   const baseUrl = "https://elysaakian.com";
   const postUrl = `${baseUrl}/blog/${slug}`;
-  const imageUrl = post.thumbnail ? `${baseUrl}${post.thumbnail}` : undefined;
 
   return {
     title: `${post.title} | Ely Saakian`,
     description: post.description ?? undefined,
     authors: [{ name: "Ely Saakian" }],
-    openGraph: {
-      type: "article",
-      url: postUrl,
-      title: post.title,
-      description: post.description ?? undefined,
-      siteName: "Ely Saakian - Developer",
-      images: imageUrl
-        ? [
-            {
-              url: imageUrl,
-              width: 1200,
-              height: 630,
-              alt: post.title,
-            },
-          ]
-        : undefined,
-      publishedTime: post.date ? new Date(post.date).toISOString() : undefined,
-    },
     twitter: {
       card: "summary_large_image",
       title: post.title,
       description: post.description ?? undefined,
-      images: imageUrl ? [imageUrl] : undefined,
     },
     alternates: {
       canonical: postUrl,
@@ -93,7 +73,7 @@ export default async function BlogPost({ params }: BlogPostParams) {
       title={post.title}
       description={post.description}
       date={post.date}
-      thumbnail={post.thumbnail}
+      seriesTitle={(post as any).series ?? null}
       readingTime={stats.text}
     >
       {post.body && <StaticTinaMarkdown content={post.body} />}

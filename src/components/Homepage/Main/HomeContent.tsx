@@ -12,7 +12,7 @@ interface HomeContentProps {
         title?: string;
         description?: string;
         date?: string;
-        thumbnail?: string;
+        series?: string;
         [key: string]: unknown;
       };
     };

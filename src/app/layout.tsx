@@ -1,9 +1,16 @@
 import type { Metadata } from "next";
+import { Roboto } from "next/font/google";
 import { ViewTransition } from "react";
 import "@/styles/index.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Providers } from "@/components/Providers";
+
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "700"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Ely Saakian - Developer",
@@ -30,7 +37,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-white dark:bg-gray-900 min-h-screen">
+      <body className={`${roboto.className} bg-white dark:bg-gray-900 min-h-screen`}>
         <Providers>
           <Header />
           <div className="flex flex-col container mx-auto lg:max-w-[960px]">

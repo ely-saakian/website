@@ -28,7 +28,7 @@ export default function ClientPost(props: ClientPostProps) {
       title={post.title}
       description={post.description}
       date={post.date}
-      thumbnail={post.thumbnail}
+      seriesTitle={(post as any).series ?? null}
       readingTime={props.readingTime}
     >
       {post.body && <TinaMarkdown content={post.body} />}
