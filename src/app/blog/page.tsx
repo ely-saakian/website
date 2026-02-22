@@ -3,6 +3,7 @@ import Link from "next/link";
 import client from "@tina/__generated__/client";
 import Main from "@/components/Blog/Main";
 import BlogpostCard from "@/components/Blog/BlogpostCard";
+import BlogPostListCard from "@/components/Blog/BlogPostListCard";
 
 async function getBlogPosts() {
   try {
@@ -32,6 +33,7 @@ async function getBlogPosts() {
             title: node.title,
             description: node.description,
             date: formattedDate,
+            dateRaw: node.date,
             series: (node as any).series ?? null,
             readingTime: timeToRead,
           },
@@ -50,15 +52,24 @@ export default async function Blog() {
 
   return (
     <Main>
-      {posts.map((post: any) => (
+      {posts.map((post: any, index: number) => (
         <Link key={post.frontmatter.title} href={`/blog/${post.slug}`}>
-          <BlogpostCard
-            title={post.frontmatter.title}
-            description={post.frontmatter.description}
-            date={post.frontmatter.date}
-            seriesTitle={post.frontmatter.series ?? ""}
-            readingTime={post.frontmatter.readingTime}
-          />
+          {index === 0 ? (
+            <BlogpostCard
+              title={post.frontmatter.title}
+              description={post.frontmatter.description}
+              date={post.frontmatter.date}
+              seriesTitle={post.frontmatter.series ?? ""}
+              readingTime={post.frontmatter.readingTime}
+            />
+          ) : (
+            <BlogPostListCard
+              title={post.frontmatter.title}
+              description={post.frontmatter.description}
+              date={post.frontmatter.dateRaw ?? post.frontmatter.date}
+              seriesTitle={post.frontmatter.series}
+            />
+          )}
         </Link>
       ))}
     </Main>
