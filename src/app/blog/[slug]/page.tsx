@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { StaticTinaMarkdown } from "tinacms/dist/rich-text/static";
 import client from "@tina/__generated__/client";
 import { ArticleLayout } from "@/components/Blog/ArticleLayout";
+import { CodeBlock } from "@/components/Blog/CodeBlock";
 
 interface BlogPostParams {
   params: Promise<{ slug: string }>;
@@ -76,7 +77,19 @@ export default async function BlogPost({ params }: BlogPostParams) {
       seriesTitle={(post as any).series ?? null}
       readingTime={stats.text}
     >
-      {post.body && <StaticTinaMarkdown content={post.body} />}
+      {post.body && (
+        <StaticTinaMarkdown
+          content={post.body}
+          components={{
+            code_block: (props: { value: string; lang?: string } | undefined) => (
+              <CodeBlock
+                value={props?.value ?? ""}
+                lang={props?.lang}
+              />
+            ),
+          }}
+        />
+      )}
     </ArticleLayout>
   );
 }

@@ -3,6 +3,7 @@
 import { useTina } from "tinacms/dist/react";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
 import { ArticleLayout } from "@/components/Blog/ArticleLayout";
+import { CodeBlock } from "@/components/Blog/CodeBlock";
 import type { PostQuery } from "@tina/__generated__/types";
 
 interface ClientPostProps {
@@ -31,7 +32,19 @@ export default function ClientPost(props: ClientPostProps) {
       seriesTitle={(post as any).series ?? null}
       readingTime={props.readingTime}
     >
-      {post.body && <TinaMarkdown content={post.body} />}
+      {post.body && (
+        <TinaMarkdown
+          content={post.body}
+          components={{
+            code_block: (props: { value: string; lang?: string } | undefined) => (
+              <CodeBlock
+                value={props?.value ?? ""}
+                lang={props?.lang}
+              />
+            ),
+          }}
+        />
+      )}
     </ArticleLayout>
   );
 }

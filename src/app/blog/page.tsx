@@ -38,7 +38,7 @@ async function getBlogPosts() {
         };
       }) ?? [];
 
-    return posts.filter(Boolean);
+    return posts.filter(Boolean).reverse();
   } catch (error) {
     console.error("Error fetching posts from Tina:", error);
     return [];
