@@ -1,0 +1,9 @@
+[
+  {
+    "title": "Milena's Beauty Bar",
+    "description": "Statically generated business site built with Next.js 16 (App Router), React 19, TypeScript, and Tailwind CSS 4. Content is managed through TinaCMS with Markdown files for services, blog posts, and promotions. Includes structured data for SEO, dynamic service catalogs, and a blog with reading-time estimates.",
+    "url": "https://www.milenasbeautybar.com/",
+    "imageUrl": "/images/mbb_website.png",
+    "date": "2025-11-01"
+  }
+]

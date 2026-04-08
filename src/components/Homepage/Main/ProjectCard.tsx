@@ -26,7 +26,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             {formatDistanceToNow(new Date(project.date), { addSuffix: true })}
           </p>
         </div>
-        <div className="h-[200px] relative">
+        <div className="h-[300px] relative">
           <Image
             src={project.imageUrl}
             alt="Weather app powered by Open Weather API Image"

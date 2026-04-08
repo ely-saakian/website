@@ -3,10 +3,12 @@
 import Masonry from "react-masonry-css";
 import ProjectCard from "@/components/Homepage/Main/ProjectCard";
 import Main from "@/components/Homepage/Main/index";
+import projectsData from "@/data/projects.json";
 import { Project } from "@/types/project";
 
+const projects = projectsData as Project[];
+
 export default function Projects() {
-  const projects: Project[] = [];
 
   const breakpointColumnsObj = {
     default: 2,

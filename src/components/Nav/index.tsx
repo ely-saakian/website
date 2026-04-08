@@ -67,7 +67,7 @@ const Nav = () => {
             Blog
           </div>
         </Link>
-        {/* <Link href="/projects">
+        <Link href="/projects">
           <div
             ref={projectsTabRef}
             className="nav-btn"
@@ -75,7 +75,7 @@ const Nav = () => {
           >
             Projects
           </div>
-        </Link> */}
+        </Link>
       </div>
     </nav>
   );
