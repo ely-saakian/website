@@ -12,6 +12,7 @@
   "dependencies": {
     "@heroicons/react": "^1.0.4",
     "@react-spring/web": "^10.0.1",
+    "@youversion/platform-react-ui": "^1.22.3",
     "date-fns": "^2.24.0",
     "lodash": "^4.17.21",
     "next": "^16.1.6",

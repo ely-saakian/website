@@ -4,6 +4,7 @@ import Masonry from "react-masonry-css";
 import IntroCard from "./IntroCard";
 import LatestBlogPostCard from "./LatestBlogPostCard";
 import DailyQuoteCard from "./DailyQuoteCard";
+import { VerseOfTheDay } from "@youversion/platform-react-ui";
 
 interface HomeContentProps {
   latestPost: {
@@ -33,7 +34,12 @@ export function HomeContent({ latestPost }: HomeContentProps) {
       <IntroCard />
       {!latestPost && <DailyQuoteCard />}
       {latestPost && <LatestBlogPostCard latestPost={latestPost} />}
-      {latestPost && <DailyQuoteCard />}
+      {/* {latestPost && <DailyQuoteCard />} */}
+      <VerseOfTheDay
+        showBibleAppAttribution={false}
+        showSunIcon={false}
+        versionId={2692}
+      />
     </Masonry>
   );
 }
