@@ -13,15 +13,15 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: "Ely Saakian - Developer",
+  title: "Ely Saakian - Frontend Engineer",
   description:
-    "Hey, I'm Ely and I am a full-stack developer. Currently a software engineer at Amazon. With my passion for coding I'm here to share the things I learn along my path to being the best at what I do. Also feel free to hit me up for your projects. Cheers!",
+    "Building and optimizing frontend experiences at scale: React SPAs, Next.js apps, Core Web Vitals, bundle analysis, production TypeScript, design system implementation, performance profiling, and modern component architecture.",
   openGraph: {
-    title: "Ely Saakian - Developer",
+    title: "Ely Saakian - Frontend Engineer",
     description:
-      "Hey, I'm Ely and I am a full-stack developer. Currently a software engineer at Amazon. With my passion for coding I'm here to share the things I learn along my path to being the best at what I do. Also feel free to hit me up for your projects. Cheers!",
+      "Building and optimizing frontend experiences at scale: React SPAs, Next.js apps, Core Web Vitals, bundle analysis, production TypeScript, design system implementation, performance profiling, and modern component architecture.",
     url: "https://elysaakian.com",
-    siteName: "Ely Saakian - Developer",
+    siteName: "Ely Saakian - Frontend Engineer",
     images: [
       {
         url: "https://res.cloudinary.com/doololujs/image/upload/v1633305763/social_preview_t4z4pj.png",
