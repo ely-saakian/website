@@ -15,10 +15,9 @@
     "@youversion/platform-react-ui": "^1.22.3",
     "date-fns": "^2.24.0",
     "lodash": "^4.17.21",
-    "next": "^16.1.6",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4",
-    "react-masonry-css": "^1.0.16",
+    "next": "16.2.6",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
     "react-syntax-highlighter": "^16.1.0",
     "reading-time": "^1.5.0",
     "spin-delay": "^2.0.1",
@@ -30,14 +29,17 @@
     "@tinacms/cli": "^2.1.5",
     "@types/lodash": "^4.14.185",
     "@types/node": "^25.2.3",
-    "@types/react": "^19.2.13",
+    "@types/react": "19.2.14",
     "@types/react-syntax-highlighter": "^15.5.13",
     "autoprefixer": "^10.4.21",
     "eslint": "^9.0.0",
-    "eslint-config-next": "^16.1.6",
+    "eslint-config-next": "16.2.6",
     "postcss": "^8.5.5",
     "prettier": "^3.0.1",
     "tailwindcss": "^4.1.10",
     "typescript": "^5.7.3"
+  },
+  "overrides": {
+    "@types/react": "19.2.14"
   }
 }

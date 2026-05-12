@@ -1,9 +1,7 @@
 "use client";
 
-import Masonry from "react-masonry-css";
 import IntroCard from "./IntroCard";
 import LatestBlogPostCard from "./LatestBlogPostCard";
-import DailyQuoteCard from "./DailyQuoteCard";
 import { VerseOfTheDay } from "@youversion/platform-react-ui";
 
 interface HomeContentProps {
@@ -23,23 +21,15 @@ interface HomeContentProps {
 }
 
 export function HomeContent({ latestPost }: HomeContentProps) {
-  const breakpointColumnsObj = { default: 2, 768: 1 };
-
   return (
-    <Masonry
-      breakpointCols={breakpointColumnsObj}
-      className="my-masonry-grid flex space-x-10"
-      columnClassName="my-masonry-grid_column space-y-10"
-    >
+    <div className="columns-1 md:columns-2 gap-10 *:mb-10 *:break-inside-avoid">
       <IntroCard />
-      {!latestPost && <DailyQuoteCard />}
       {latestPost && <LatestBlogPostCard latestPost={latestPost} />}
-      {/* {latestPost && <DailyQuoteCard />} */}
       <VerseOfTheDay
         showBibleAppAttribution={false}
         showSunIcon={false}
         versionId={2692}
       />
-    </Masonry>
+    </div>
   );
 }
