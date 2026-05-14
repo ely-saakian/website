@@ -5,6 +5,7 @@ import "@/styles/index.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Providers } from "@/components/Providers";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -52,6 +53,7 @@ export default function RootLayout({
           </div>
         </Providers>
       </body>
+      <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />
     </html>
   );
 }
