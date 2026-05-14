@@ -1,8 +1,16 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import IntroCard from "./IntroCard";
 import LatestBlogPostCard from "./LatestBlogPostCard";
-import { VerseOfTheDay } from "@youversion/platform-react-ui";
+
+const VerseOfTheDay = dynamic(
+  () =>
+    import("@youversion/platform-react-ui").then((m) => ({
+      default: m.VerseOfTheDay,
+    })),
+  { ssr: false },
+);
 
 interface HomeContentProps {
   latestPost: {
