@@ -40,7 +40,6 @@ export async function generateMetadata({
 
   return {
     title: `${post.title} | Ely Saakian`,
-    description: post.description ?? undefined,
     authors: [{ name: "Ely Saakian" }],
     twitter: {
       card: "summary_large_image",
@@ -72,7 +71,6 @@ export default async function BlogPost({ params }: BlogPostParams) {
   return (
     <ArticleLayout
       title={post.title}
-      description={post.description}
       date={post.date}
       seriesTitle={(post as any).series ?? null}
       readingTime={stats.text}
@@ -81,12 +79,9 @@ export default async function BlogPost({ params }: BlogPostParams) {
         <StaticTinaMarkdown
           content={post.body}
           components={{
-            code_block: (props: { value: string; lang?: string } | undefined) => (
-              <CodeBlock
-                value={props?.value ?? ""}
-                lang={props?.lang}
-              />
-            ),
+            code_block: (
+              props: { value: string; lang?: string } | undefined,
+            ) => <CodeBlock value={props?.value ?? ""} lang={props?.lang} />,
           }}
         />
       )}

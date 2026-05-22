@@ -2,7 +2,7 @@ import AvatarMeIcon from "@/components/icons/AvatarMeIcon";
 
 const IntroCard = () => {
   return (
-    <article className="flex flex-col p-10 space-y-5 lg:max-w-[600px]">
+    <article className="flex flex-col pt-10 pb-5 px-2 sm:px-0 space-y-5 lg:max-w-[600px]">
       <div className="flex items-center space-x-5">
         <AvatarMeIcon></AvatarMeIcon>
         <h1 className="text-2xl font-medium text-dark dark:text-white">

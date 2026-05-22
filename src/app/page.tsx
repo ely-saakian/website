@@ -2,6 +2,7 @@ import readingTime from "reading-time";
 import client from "@tina/__generated__/client";
 import Main from "@/components/Homepage/Main";
 import { HomeContent } from "@/components/Homepage/Main/HomeContent";
+import projectsData from "@/data/projects.json";
 
 async function getHomeData() {
   let latestPostResult = null;
@@ -36,15 +37,15 @@ async function getHomeData() {
     console.error("Error fetching latest post from Tina: ", error);
   }
 
-  return { latestPost: latestPostResult };
+  return { latestPost: latestPostResult, latestProject: projectsData[0] };
 }
 
 export default async function Home() {
-  const { latestPost } = await getHomeData();
+  const { latestPost, latestProject } = await getHomeData();
 
   return (
     <Main>
-      <HomeContent latestPost={latestPost} />
+      <HomeContent latestPost={latestPost} latestProject={latestProject} />
     </Main>
   );
 }

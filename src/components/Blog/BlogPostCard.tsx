@@ -48,7 +48,7 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({
         <div className="flex flex-col pb-10 px-10 space-y-5">
           <div className="flex items-center gap-2">
             {dateLabel && (
-              <p className="font-light text-gray-400 dark:text-white text-sm">
+              <p className="font-light text-gray-400 dark:text-gray-500 text-sm">
                 {dateLabel}
               </p>
             )}

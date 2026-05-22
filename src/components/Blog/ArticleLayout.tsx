@@ -3,7 +3,6 @@ import { BlogPostCover } from "./BlogPostCover";
 
 interface ArticleLayoutProps {
   title: string;
-  description?: string | null;
   date?: string | null;
   seriesTitle?: string | null;
   readingTime?: string;
@@ -12,13 +11,12 @@ interface ArticleLayoutProps {
 
 export function ArticleLayout({
   title,
-  description,
   date,
   seriesTitle,
   readingTime,
   children,
 }: ArticleLayoutProps) {
-  const formattedDate = date
+  const dateLabel = date
     ? new Date(date).toLocaleDateString("en-US", {
         year: "numeric",
         month: "short",
@@ -27,26 +25,30 @@ export function ArticleLayout({
     : null;
 
   return (
-    <>
-      <BackButton />
+    <div className="flex flex-col gap-8">
+      <div className="px-10">
+        <BackButton />
+      </div>
       <article>
         {seriesTitle && (
           <BlogPostCover seriesTitle={seriesTitle} articleTitle={title} />
         )}
-        <div className="prose dark:prose-invert mx-auto py-10 px-10 sm:px-0">
-          {(formattedDate || readingTime) && (
-            <p className="font-light italic text-gray-500 dark:text-white">
-              {formattedDate}
-              {formattedDate && readingTime ? " · " : ""}
-              {readingTime}
+        <div className="flex items-center gap-2 px-10 pb-12 justify-center">
+          {dateLabel && (
+            <p className="font-light text-gray-400 dark:text-gray-500 text-sm">
+              {dateLabel}
             </p>
           )}
+          <span className="text-gray-400 dark:text-gray-500 text-sm">|</span>
+          <p className="font-light text-gray-400 dark:text-gray-500 text-sm">
+            {readingTime}
+          </p>
         </div>
 
-        <div className="prose dark:prose-invert mx-auto px-10 sm:px-0">
+        <div className="mx-auto prose dark:prose-invert px-10 sm:px-0">
           {children}
         </div>
       </article>
-    </>
+    </div>
   );
 }

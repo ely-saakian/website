@@ -7,14 +7,12 @@ export function BackButton() {
   const router = useRouter();
 
   return (
-    <div className="px-5">
-      <button
-        className="text-gray-400 inline-flex items-center"
-        onClick={() => router.push("/blog")}
-      >
-        <ChevronLeftIcon className="w-7 h-7 mr-1" />
-        <span>Blog</span>
-      </button>
-    </div>
+    <button
+      className="text-gray-600 inline-flex items-center cursor-pointer"
+      onClick={() => router.push("/blog")}
+    >
+      <ChevronLeftIcon className="w-8 h-8 mr-1" />
+      <span className="pt-1">Back to blog</span>
+    </button>
   );
 }
