@@ -4,7 +4,6 @@ import { ViewTransition } from "react";
 import "@/styles/index.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { Providers } from "@/components/Providers";
 import { GoogleAnalytics } from "@next/third-parties/google";
 
 const roboto = Roboto({
@@ -42,19 +41,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${roboto.className} bg-white dark:bg-gray-900 min-h-screen`}
+        className={`${roboto.className} bg-[#F9F7F4] dark:bg-[#161615] min-h-screen`}
       >
-        <Providers>
-          <Header />
-          <div className="flex flex-col container mx-auto lg:max-w-[960px]">
-            <div className="min-h-screen">
-              <ViewTransition default="page-transition">
-                {children}
-              </ViewTransition>
-            </div>
-            <Footer />
+        <Header />
+        <div className="flex flex-col container mx-auto lg:max-w-[960px]">
+          <div className="min-h-screen">
+            <ViewTransition default="page-transition">
+              {children}
+            </ViewTransition>
           </div>
-        </Providers>
+          <Footer />
+        </div>
       </body>
       {isProd && gaId && <GoogleAnalytics gaId={gaId} />}
     </html>

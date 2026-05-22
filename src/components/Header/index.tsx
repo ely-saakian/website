@@ -4,7 +4,7 @@ import Nav from "@/components/Nav/index";
 
 const Header = () => {
   return (
-    <header className="flex flex-col sm:flex-row space-y-10 sm:space-y-0 content-between items-center justify-between px-10 py-12 xl:px-14 bg-white dark:bg-gray-900">
+    <header className="flex flex-col sm:flex-row space-y-10 sm:space-y-0 content-between items-center justify-between px-10 py-10 pb-0 sm:pb-12 xl:px-14">
       <div className="flex w-full sm:w-auto justify-between">
         <Link href="/" title="Go Home">
           <p className="font-bold text-2xl text-transparent bg-clip-text bg-gradient-to-br from-[#9CD6FF] to-[#6C95B1] inline-block">

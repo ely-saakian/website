@@ -1,9 +1,8 @@
+import { Fragment } from "react";
 import readingTime from "reading-time";
-import Link from "next/link";
 import client from "@tina/__generated__/client";
 import Main from "@/components/Blog/Main";
-import BlogpostCard from "@/components/Blog/BlogpostCard";
-import BlogPostListCard from "@/components/Blog/BlogPostListCard";
+import BlogPostCard from "@/components/Blog/BlogPostCard";
 
 async function getBlogPosts() {
   try {
@@ -29,14 +28,13 @@ async function getBlogPosts() {
 
         return {
           slug: node._sys.filename,
-          frontmatter: {
+          data: {
             title: node.title,
             description: node.description,
             date: formattedDate,
-            dateRaw: node.date,
             series: (node as any).series ?? null,
-            readingTime: timeToRead,
           },
+          timeToRead: timeToRead,
         };
       }) ?? [];
 
@@ -53,24 +51,21 @@ export default async function Blog() {
   return (
     <Main>
       {posts.map((post: any, index: number) => (
-        <Link key={post.frontmatter.title} href={`/blog/${post.slug}`}>
-          {index === 0 ? (
-            <BlogpostCard
-              title={post.frontmatter.title}
-              description={post.frontmatter.description}
-              date={post.frontmatter.date}
-              seriesTitle={post.frontmatter.series ?? ""}
-              readingTime={post.frontmatter.readingTime}
-            />
-          ) : (
-            <BlogPostListCard
-              title={post.frontmatter.title}
-              description={post.frontmatter.description}
-              date={post.frontmatter.dateRaw ?? post.frontmatter.date}
-              seriesTitle={post.frontmatter.series}
-            />
+        <Fragment key={post.slug}>
+          <BlogPostCard post={post} featured={index === 0} />
+          {index === 0 && posts.length > 1 && (
+            <div
+              className="flex items-center gap-4 w-full max-w-[600px]"
+              aria-hidden
+            >
+              <span className="h-px flex-1 bg-gray-200 dark:bg-gray-700" />
+              <span className="text-xs uppercase tracking-wide font-light text-gray-400 dark:text-gray-500">
+                More posts
+              </span>
+              <span className="h-px flex-1 bg-gray-200 dark:bg-gray-700" />
+            </div>
           )}
-        </Link>
+        </Fragment>
       ))}
     </Main>
   );

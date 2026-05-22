@@ -20,15 +20,13 @@ async function getHomeData() {
       const timeToRead = readingTime(bodyString).text;
 
       latestPostResult = {
-        latestPostData: {
-          data: {
-            title: latestEdge.title,
-            description: latestEdge.description ?? undefined,
-            date: latestEdge.date
-              ? new Date(latestEdge.date).toString()
-              : undefined,
-            series: (latestEdge as any).series ?? undefined,
-          },
+        data: {
+          title: latestEdge.title,
+          description: latestEdge.description ?? undefined,
+          date: latestEdge.date
+            ? new Date(latestEdge.date).toString()
+            : undefined,
+          series: (latestEdge as any).series ?? undefined,
         },
         timeToRead,
         slug: latestEdge._sys.filename,

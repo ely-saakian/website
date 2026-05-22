@@ -16,7 +16,10 @@ const NavButton = forwardRef<
 >(({ href, children, onClick }, ref) => {
   const pathname = usePathname();
 
-  const isActive = pathname?.replaceAll("/", "") === href.replaceAll("/", "");
+  const isActive =
+    href === "/"
+      ? pathname === "/"
+      : pathname === href || pathname?.startsWith(`${href}/`);
 
   return (
     <Link href={href}>
@@ -85,17 +88,17 @@ const Nav = () => {
         {sliderStyles && <NavSlider sliderStyles={sliderStyles} />}
         <div className="hidden" ref={errorTabRef}></div>
         <NavButton href="/" ref={homeTabRef} onClick={selectTabHandler}>
-          HOME
+          Home
         </NavButton>
         <NavButton href="/blog" ref={blogTabRef} onClick={selectTabHandler}>
-          BLOG
+          Blog
         </NavButton>
         <NavButton
           href="/projects"
           ref={projectsTabRef}
           onClick={selectTabHandler}
         >
-          PROJECTS
+          Projects
         </NavButton>
       </div>
     </nav>
