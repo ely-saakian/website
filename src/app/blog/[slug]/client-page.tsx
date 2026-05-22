@@ -27,7 +27,6 @@ export default function ClientPost(props: ClientPostProps) {
   return (
     <ArticleLayout
       title={post.title}
-      description={post.description}
       date={post.date}
       seriesTitle={(post as any).series ?? null}
       readingTime={props.readingTime}
@@ -36,12 +35,9 @@ export default function ClientPost(props: ClientPostProps) {
         <TinaMarkdown
           content={post.body}
           components={{
-            code_block: (props: { value: string; lang?: string } | undefined) => (
-              <CodeBlock
-                value={props?.value ?? ""}
-                lang={props?.lang}
-              />
-            ),
+            code_block: (
+              props: { value: string; lang?: string } | undefined,
+            ) => <CodeBlock value={props?.value ?? ""} lang={props?.lang} />,
           }}
         />
       )}
