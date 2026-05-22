@@ -1,9 +1,36 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { forwardRef, useEffect, useRef, useState } from "react";
 import NavSlider, { TabSliderStyles } from "./NavSlider";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
+
+const NavButton = forwardRef<
+  HTMLDivElement,
+  {
+    href: string;
+    children: React.ReactNode;
+    onClick: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  }
+>(({ href, children, onClick }, ref) => {
+  const pathname = usePathname();
+
+  const isActive = pathname?.replaceAll("/", "") === href.replaceAll("/", "");
+
+  return (
+    <Link href={href}>
+      <div
+        className={cn("nav-btn", isActive ? "text-black dark:text-white" : "")}
+        ref={ref}
+        onClick={onClick}
+      >
+        {children}
+      </div>
+    </Link>
+  );
+});
+NavButton.displayName = "NavButton";
 
 const Nav = () => {
   const pathname = usePathname();
@@ -54,28 +81,22 @@ const Nav = () => {
 
   return (
     <nav className="text-center">
-      <div className="relative inline-flex flex-row py-1.5 px-1.5 bg-gray-200 dark:bg-gray-800 rounded-full -translate-x-0 text-sm">
+      <div className="relative inline-flex flex-row py-1.5 px-1.5 bg-gray-200 dark:bg-gray-800 rounded-full translate-x-0 text-sm">
         {sliderStyles && <NavSlider sliderStyles={sliderStyles} />}
         <div className="hidden" ref={errorTabRef}></div>
-        <Link href="/">
-          <div ref={homeTabRef} className="nav-btn" onClick={selectTabHandler}>
-            Home
-          </div>
-        </Link>
-        <Link href="/blog">
-          <div ref={blogTabRef} className="nav-btn" onClick={selectTabHandler}>
-            Blog
-          </div>
-        </Link>
-        <Link href="/projects">
-          <div
-            ref={projectsTabRef}
-            className="nav-btn"
-            onClick={selectTabHandler}
-          >
-            Projects
-          </div>
-        </Link>
+        <NavButton href="/" ref={homeTabRef} onClick={selectTabHandler}>
+          HOME
+        </NavButton>
+        <NavButton href="/blog" ref={blogTabRef} onClick={selectTabHandler}>
+          BLOG
+        </NavButton>
+        <NavButton
+          href="/projects"
+          ref={projectsTabRef}
+          onClick={selectTabHandler}
+        >
+          PROJECTS
+        </NavButton>
       </div>
     </nav>
   );
