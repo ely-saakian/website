@@ -1,6 +1,7 @@
 import readingTime from "reading-time";
 import client from "@tina/__generated__/client";
 import seriesData from "@/data/series.json";
+import { localMediaPath } from "@/lib/media";
 
 export interface PostSummary {
   slug: string;
@@ -48,7 +49,7 @@ export async function getAllPosts(): Promise<PostSummary[]> {
           series: node.series ?? null,
           part: null,
           partsInSeries: null,
-          coverImage: node.coverImage ?? null,
+          coverImage: localMediaPath(node.coverImage),
           coverAlt: node.coverAlt ?? "",
           readingTime: stats.text,
           readingMinutes: Math.ceil(stats.minutes),
