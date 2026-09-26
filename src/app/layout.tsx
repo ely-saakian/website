@@ -1,14 +1,27 @@
 import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
+import { Geist, Geist_Mono, Newsreader } from "next/font/google";
 import { ViewTransition } from "react";
 import "@/styles/index.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { GoogleAnalytics } from "@next/third-parties/google";
 
-const roboto = Roboto({
+const geist = Geist({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "700"],
+  variable: "--font-geist",
+  display: "swap",
+});
+
+const geistMono = Geist_Mono({
+  subsets: ["latin"],
+  variable: "--font-geist-mono",
+  display: "swap",
+});
+
+// Post titles only.
+const newsreader = Newsreader({
+  subsets: ["latin"],
+  variable: "--font-newsreader",
   display: "swap",
 });
 
@@ -41,7 +54,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${roboto.className} bg-[#F9F7F4] dark:bg-[#161615] min-h-screen`}
+        className={`${geist.variable} ${geistMono.variable} ${newsreader.variable} font-sans bg-paper text-ink antialiased min-h-screen`}
       >
         <Header />
         <div className="flex flex-col container mx-auto lg:max-w-[960px]">

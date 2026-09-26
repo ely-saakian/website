@@ -13,6 +13,7 @@ interface ClientPostProps {
   };
   data: PostQuery;
   readingTime: string;
+  seriesLabel: string | null;
 }
 
 export default function ClientPost(props: ClientPostProps) {
@@ -28,8 +29,10 @@ export default function ClientPost(props: ClientPostProps) {
     <ArticleLayout
       title={post.title}
       date={post.date}
-      seriesTitle={(post as any).series ?? null}
+      seriesLabel={props.seriesLabel}
       readingTime={props.readingTime}
+      coverImage={post.coverImage}
+      coverAlt={post.coverAlt}
     >
       {post.body && (
         <TinaMarkdown

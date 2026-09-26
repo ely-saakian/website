@@ -1,9 +1,24 @@
 [
   {
+    "title": "Gymento",
+    "description": "A native iOS strength-training app that runs the plan: it sets the weight for every session, catches a stall within three sessions, and shows the reason for every change. Designed and built solo: a SwiftUI app with an Apple Watch companion and Live Activity, a Hono + Postgres API, and the Next.js landing page.",
+    "url": "https://gymento.com/",
+    "imageUrl": "/images/gymento.jpg",
+    "imageAlt": "Gymento's landing page: “Keep getting stronger.” beside the in-session logger on iPhone and Apple Watch",
+    "date": "2026-09-26",
+    "tags": ["iOS · Apple Watch"],
+    "status": "coming-soon",
+    "stack": ["SwiftUI", "Hono", "Postgres", "OpenAPI", "Next.js"]
+  },
+  {
     "title": "Milena's Beauty Bar",
     "description": "Statically generated business site built with Next.js 16 (App Router), React 19, TypeScript, and Tailwind CSS 4. Content is managed through TinaCMS with Markdown files for services, blog posts, and promotions. Includes structured data for SEO, dynamic service catalogs, and a blog with reading-time estimates.",
     "url": "https://www.milenasbeautybar.com/",
     "imageUrl": "/images/mbb_website.png",
-    "date": "2025-11-01"
+    "imageAlt": "Milena's Beauty Bar logo",
+    "date": "2025-11-01",
+    "tags": ["Business website"],
+    "status": "live",
+    "stack": ["Next.js", "React", "Tailwind CSS", "TinaCMS"]
   }
 ]

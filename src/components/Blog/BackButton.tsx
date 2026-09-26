@@ -1,18 +1,24 @@
-"use client";
-
-import { useRouter } from "next/navigation";
-import { ChevronLeftIcon } from "@heroicons/react/solid";
+import Link from "next/link";
 
 export function BackButton() {
-  const router = useRouter();
-
   return (
-    <button
-      className="text-gray-600 inline-flex items-center cursor-pointer"
-      onClick={() => router.push("/blog")}
+    <Link
+      href="/blog"
+      className="inline-flex h-11 items-center gap-1.5 text-sm text-muted transition-colors hover:text-accent"
     >
-      <ChevronLeftIcon className="w-8 h-8 mr-1" />
-      <span className="pt-1">Back to blog</span>
-    </button>
+      <svg
+        className="size-4"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M19 12H5M11 18l-6-6 6-6" />
+      </svg>
+      All posts
+    </Link>
   );
 }

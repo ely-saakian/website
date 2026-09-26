@@ -1,72 +1,43 @@
-import { Fragment } from "react";
-import readingTime from "reading-time";
-import client from "@tina/__generated__/client";
 import Main from "@/components/Blog/Main";
-import BlogPostCard from "@/components/Blog/BlogPostCard";
-
-async function getBlogPosts() {
-  try {
-    const postsResponse = await client.queries.postConnection({
-      sort: "date",
-    });
-
-    const posts =
-      postsResponse.data?.postConnection?.edges?.map((edge) => {
-        const node = edge?.node;
-        if (!node) return null;
-
-        const bodyString = JSON.stringify(node.body);
-        const timeToRead = readingTime(bodyString).text;
-
-        const formattedDate = node.date
-          ? new Date(node.date).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "short",
-              day: "numeric",
-            })
-          : null;
-
-        return {
-          slug: node._sys.filename,
-          data: {
-            title: node.title,
-            description: node.description,
-            date: formattedDate,
-            series: (node as any).series ?? null,
-          },
-          timeToRead: timeToRead,
-        };
-      }) ?? [];
-
-    return posts.filter(Boolean).reverse();
-  } catch (error) {
-    console.error("Error fetching posts from Tina:", error);
-    return [];
-  }
-}
+import { PostRow, SeriesSection } from "@/components/Blog/SeriesSection";
+import { getAllPosts, groupBySeries } from "@/lib/posts";
 
 export default async function Blog() {
-  const posts = await getBlogPosts();
+  let posts: Awaited<ReturnType<typeof getAllPosts>> = [];
+  try {
+    posts = await getAllPosts();
+  } catch (error) {
+    console.error("Error fetching posts from Tina:", error);
+  }
+
+  const { series, standalone } = groupBySeries(posts);
 
   return (
     <Main>
-      {posts.map((post: any, index: number) => (
-        <Fragment key={post.slug}>
-          <BlogPostCard post={post} featured={index === 0} />
-          {index === 0 && posts.length > 1 && (
-            <div
-              className="flex items-center gap-4 w-full max-w-[600px]"
-              aria-hidden
-            >
-              <span className="h-px flex-1 bg-gray-200 dark:bg-gray-700" />
-              <span className="text-xs uppercase tracking-wide font-light text-gray-400 dark:text-gray-500">
-                More posts
-              </span>
-              <span className="h-px flex-1 bg-gray-200 dark:bg-gray-700" />
-            </div>
-          )}
-        </Fragment>
-      ))}
+      <div className="flex w-full max-w-[960px] flex-col gap-10 pt-2">
+        <h1 className="text-4xl font-semibold tracking-[-0.025em] text-ink sm:text-[40px]">
+          Blog
+        </h1>
+
+        {series.map((s) => (
+          <SeriesSection key={s.name} series={s} />
+        ))}
+
+        {standalone.length > 0 && (
+          <section aria-labelledby="more-writing" className="flex flex-col">
+            <h2 id="more-writing" className="eyebrow pb-2">
+              More writing
+            </h2>
+            <ul className="flex flex-col">
+              {standalone.map((post) => (
+                <li key={post.slug} className="border-t border-line">
+                  <PostRow post={post} />
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+      </div>
     </Main>
   );
 }

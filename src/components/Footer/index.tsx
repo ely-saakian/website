@@ -1,10 +1,10 @@
 const Footer = () => {
   return (
     <footer>
-      <p className="text-sm text-gray-600 text-center p-12 dark:text-white">
+      <p className="text-sm text-muted text-center p-12">
         Made with{" "}
         <a
-          className="underline"
+          className="text-text underline underline-offset-3 hover:text-accent"
           href="https://nextjs.org/"
           rel="noreferrer"
           target="_blank"
@@ -13,7 +13,7 @@ const Footer = () => {
         </a>
         , deployed on{" "}
         <a
-          className="underline"
+          className="text-text underline underline-offset-3 hover:text-accent"
           href="https://vercel.com/"
           rel="noreferrer"
           target="_blank"

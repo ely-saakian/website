@@ -3,6 +3,8 @@ title: "How React Uses the Main Thread: Trigger → Render → Commit"
 date: 2026-02-21T22:21:19.275Z
 description: "How the browser's main thread actually works, where React's Trigger → Render → Commit pipeline fits inside it, and why that explains every kind of slowness you've seen."
 series: React Performance
+coverImage: /images/blog/react-main-thread.jpg
+coverAlt: "One red thread running through a bell, a drafting compass and a rubber stamp"
 ---
 
 ## Introduction

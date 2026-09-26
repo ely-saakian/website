@@ -20,7 +20,7 @@ const NavSlider = ({ sliderStyles }: { sliderStyles?: TabSliderStyles }) => {
 
   return (
     <AnimatedDiv
-      className="absolute bg-white dark:bg-gray-600 rounded-full z-[-1]"
+      className="absolute bg-raised rounded-full z-[-1] shadow-[0_0_0_1px_var(--line),0_1px_2px_rgb(23_22_26/0.08)]"
       style={styles}
     />
   );

@@ -8,7 +8,7 @@ const projects = projectsData as Project[];
 export default function Projects() {
   return (
     <Main>
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center gap-10 pt-2">
         {projects.map((project) => (
           <ProjectCard key={project.url} project={project} />
         ))}
