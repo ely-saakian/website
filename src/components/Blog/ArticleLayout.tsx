@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { BackButton } from "./BackButton";
 import { formatPostDate } from "@/lib/posts";
+import { localMediaPath } from "@/lib/media";
 
 interface ArticleLayoutProps {
   title: string;
@@ -23,6 +24,7 @@ export function ArticleLayout({
   children,
 }: ArticleLayoutProps) {
   const dateLabel = formatPostDate(date);
+  const cover = localMediaPath(coverImage);
 
   return (
     <div className="flex flex-col items-center gap-8 px-5">
@@ -59,10 +61,10 @@ export function ArticleLayout({
           </div>
         </header>
 
-        {coverImage && (
+        {cover && (
           <figure className="relative mt-2 aspect-video w-full max-w-[960px] overflow-hidden rounded-2xl shadow-[0_0_0_1px_var(--line)]">
             <Image
-              src={coverImage}
+              src={cover}
               alt={coverAlt ?? ""}
               fill
               priority
