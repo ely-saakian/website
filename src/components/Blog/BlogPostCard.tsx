@@ -1,76 +1,55 @@
-import { formatDistanceToNow } from "date-fns";
-import { isEmpty } from "lodash";
+import Image from "next/image";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
-import { BlogPostCover } from "./BlogPostCover";
+import ArrowRightIcon from "@/components/icons/ArrowRightIcon";
+import { formatPostDate, seriesLabel, type PostSummary } from "@/lib/posts";
 
 interface BlogPostCardProps {
-  post: {
-    data: {
-      title?: string;
-      description?: string;
-      date?: string;
-      series?: string;
-      [key: string]: unknown;
-    };
-    timeToRead: string;
-    slug: string;
-  };
-  featured?: boolean;
+  post: PostSummary;
 }
 
-const BlogPostCard: React.FC<BlogPostCardProps> = ({
-  post,
-  featured = false,
-}) => {
-  if (isEmpty(post)) return null;
-
-  const { data, timeToRead, slug } = post;
-  const dateStr = data.date ?? "";
-
-  const dateLabel = dateStr
-    ? formatDistanceToNow(new Date(dateStr), { addSuffix: true })
-    : "";
+const BlogPostCard: React.FC<BlogPostCardProps> = ({ post }) => {
+  const label = seriesLabel(post);
 
   return (
-    <article
-      className={cn(
-        "flex flex-col space-y-5 rounded-xl bg-white dark:bg-[#1C1C1B] max-w-[600px]",
-        featured ? "shadow-lg" : "",
-      )}
+    <Link
+      href={`/blog/${post.slug}`}
+      className="card-link group flex w-full max-w-[600px] flex-col overflow-hidden"
     >
-      <div className="flex flex-col pt-5">
-        <BlogPostCover
-          seriesTitle={data.series ?? ""}
-          articleTitle={data.title ?? ""}
-          small
-        />
-        <div className="flex flex-col pb-10 px-10 space-y-5">
-          <div className="flex items-center gap-2">
-            {dateLabel && (
-              <p className="font-light text-gray-400 dark:text-gray-500 text-sm">
-                {dateLabel}
-              </p>
-            )}
-            <span className="text-gray-400 dark:text-gray-500 text-sm">|</span>
-            <p className="font-light text-gray-400 dark:text-gray-500 text-sm">
-              {timeToRead}
-            </p>
-          </div>
-          <p className="text-gray-500 dark:text-gray-400 leading-relaxed">
-            {data.description}
+      {post.coverImage && (
+        <div className="relative aspect-video">
+          <Image
+            src={post.coverImage}
+            alt={post.coverAlt}
+            fill
+            sizes="(max-width: 640px) 100vw, 600px"
+            className="object-cover dark:brightness-[.88]"
+          />
+        </div>
+      )}
+      <div className="flex flex-col gap-3 p-6 sm:px-10 sm:pb-10 sm:pt-6">
+        {label && (
+          <span className="self-start rounded-full bg-accent-soft px-2.5 py-0.5 text-xs font-medium text-accent">
+            {label}
+          </span>
+        )}
+        <h2 className="font-serif text-[28px] font-semibold leading-tight tracking-[-0.01em] text-ink">
+          {post.title}
+        </h2>
+        <p className="line-clamp-3 leading-relaxed text-muted">
+          {post.description}
+        </p>
+        <div className="mt-2 flex items-center justify-between border-t border-line pt-4">
+          <p className="text-sm text-meta">
+            <time dateTime={post.date}>{formatPostDate(post.date)}</time> ·{" "}
+            {post.readingTime}
           </p>
-          <Link
-            href={"/blog/" + slug}
-            className=" text-gray-600 dark:text-white"
-          >
-            <span className="border-b border-gray-500 dark:border-white">
-              Read More
-            </span>
-          </Link>
+          <span className="inline-flex items-center gap-1.5 text-sm font-medium text-ink group-hover:text-accent">
+            Read
+            <ArrowRightIcon />
+          </span>
         </div>
       </div>
-    </article>
+    </Link>
   );
 };
 

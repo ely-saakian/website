@@ -24,7 +24,7 @@ const NavButton = forwardRef<
   return (
     <Link href={href}>
       <div
-        className={cn("nav-btn", isActive ? "text-black dark:text-white" : "")}
+        className={cn("nav-btn", isActive ? "text-ink" : "")}
         ref={ref}
         onClick={onClick}
       >
@@ -84,7 +84,7 @@ const Nav = () => {
 
   return (
     <nav className="text-center">
-      <div className="relative inline-flex flex-row py-1.5 px-1.5 bg-gray-200 dark:bg-gray-800 rounded-full translate-x-0 text-sm">
+      <div className="relative inline-flex flex-row p-1 bg-track rounded-full translate-x-0 text-sm font-[450]">
         {sliderStyles && <NavSlider sliderStyles={sliderStyles} />}
         <div className="hidden" ref={errorTabRef}></div>
         <NavButton href="/" ref={homeTabRef} onClick={selectTabHandler}>

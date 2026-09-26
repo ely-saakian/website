@@ -5,6 +5,7 @@ import { StaticTinaMarkdown } from "tinacms/dist/rich-text/static";
 import client from "@tina/__generated__/client";
 import { ArticleLayout } from "@/components/Blog/ArticleLayout";
 import { CodeBlock } from "@/components/Blog/CodeBlock";
+import { getAllPosts, seriesLabel } from "@/lib/posts";
 
 interface BlogPostParams {
   params: Promise<{ slug: string }>;
@@ -67,13 +68,16 @@ export default async function BlogPost({ params }: BlogPostParams) {
 
   const post = data.data.post;
   const stats = readingTime(JSON.stringify(post.body));
+  const summary = (await getAllPosts()).find((p) => p.slug === slug);
 
   return (
     <ArticleLayout
       title={post.title}
       date={post.date}
-      seriesTitle={(post as any).series ?? null}
+      seriesLabel={summary ? seriesLabel(summary, true) : null}
       readingTime={stats.text}
+      coverImage={post.coverImage}
+      coverAlt={post.coverAlt}
     >
       {post.body && (
         <StaticTinaMarkdown

@@ -56,6 +56,21 @@ export default defineConfig({
             type: "string",
             name: "series",
             label: "Series",
+            description:
+              "Posts in a series listed in src/data/series.json are grouped on /blog and numbered by date.",
+            required: false,
+          },
+          {
+            type: "image",
+            name: "coverImage",
+            label: "Cover image",
+            description: "16:9, at least 1344px wide.",
+            required: false,
+          },
+          {
+            type: "string",
+            name: "coverAlt",
+            label: "Cover image alt text",
             required: false,
           },
           {

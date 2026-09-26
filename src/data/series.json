@@ -1,0 +1,8 @@
+[
+  {
+    "name": "React Performance",
+    "description": "From “it feels slow” to what the main thread is actually doing.",
+    "coverImage": "/images/blog/react-performance-series.jpg",
+    "coverAlt": "A stopwatch whose face is three orbit rings around a dot"
+  }
+]

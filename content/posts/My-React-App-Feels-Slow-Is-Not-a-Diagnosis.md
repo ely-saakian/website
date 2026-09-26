@@ -3,6 +3,8 @@ title: “My React App Feels Slow” Is Not a Diagnosis
 date: 2026-02-14T18:31:31.386Z
 description: "In this post, you’ll learn why “my React app feels slow” is not a useful diagnosis, and how to translate vague user feedback into concrete categories like slow load, slow interaction, and janky scrolling. You’ll see how these map to web‑performance concepts like Time to Interactive, interaction latency, Total Blocking Time, and dropped frames, so you stop guessing where time is spent and start optimizing the right part of your React app."
 series: "React Performance"
+coverImage: /images/blog/react-feels-slow.jpg
+coverAlt: "A stethoscope pressed to a browser window, beside jars holding an hourglass, a pointer and a jagged line"
 ---
 
 ## Introduction

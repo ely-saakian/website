@@ -1,51 +1,26 @@
-import readingTime from "reading-time";
-import client from "@tina/__generated__/client";
 import Main from "@/components/Homepage/Main";
 import { HomeContent } from "@/components/Homepage/Main/HomeContent";
 import projectsData from "@/data/projects.json";
+import { getAllPosts } from "@/lib/posts";
+import { Project } from "@/types/project";
 
-async function getHomeData() {
-  let latestPostResult = null;
-
+async function getLatestPost() {
   try {
-    const postsResponse = await client.queries.postConnection({
-      sort: "date",
-      last: 1,
-    });
-
-    const latestEdge =
-      postsResponse.data?.postConnection?.edges?.[0]?.node ?? null;
-
-    if (latestEdge) {
-      const bodyString = JSON.stringify(latestEdge.body);
-      const timeToRead = readingTime(bodyString).text;
-
-      latestPostResult = {
-        data: {
-          title: latestEdge.title,
-          description: latestEdge.description ?? undefined,
-          date: latestEdge.date
-            ? new Date(latestEdge.date).toString()
-            : undefined,
-          series: (latestEdge as any).series ?? undefined,
-        },
-        timeToRead,
-        slug: latestEdge._sys.filename,
-      };
-    }
+    const posts = await getAllPosts();
+    return posts[0] ?? null;
   } catch (error) {
     console.error("Error fetching latest post from Tina: ", error);
+    return null;
   }
-
-  return { latestPost: latestPostResult, latestProject: projectsData[0] };
 }
 
 export default async function Home() {
-  const { latestPost, latestProject } = await getHomeData();
+  const latestPost = await getLatestPost();
+  const featuredProject = (projectsData as Project[])[0] ?? null;
 
   return (
     <Main>
-      <HomeContent latestPost={latestPost} latestProject={latestProject} />
+      <HomeContent latestPost={latestPost} featuredProject={featuredProject} />
     </Main>
   );
 }

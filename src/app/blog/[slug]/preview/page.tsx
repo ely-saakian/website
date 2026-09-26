@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import readingTime from "reading-time";
 import client from "@tina/__generated__/client";
 import ClientPost from "../client-page";
+import { getAllPosts, seriesLabel } from "@/lib/posts";
 
 export const metadata = {
   robots: "noindex, nofollow",
@@ -24,6 +25,7 @@ export default async function PreviewPost({ params }: PreviewParams) {
   }
 
   const stats = readingTime(JSON.stringify(data.data.post.body));
+  const summary = (await getAllPosts()).find((p) => p.slug === slug);
 
   return (
     <ClientPost
@@ -31,6 +33,7 @@ export default async function PreviewPost({ params }: PreviewParams) {
       variables={data.variables}
       data={data.data}
       readingTime={stats.text}
+      seriesLabel={summary ? seriesLabel(summary, true) : null}
     />
   );
 }
