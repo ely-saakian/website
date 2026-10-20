@@ -6,14 +6,21 @@ const IntroCard = () => {
       <div className="flex items-center space-x-5">
         <AvatarMeIcon></AvatarMeIcon>
         <h1 className="text-2xl font-medium tracking-[-0.01em] text-ink">
-          Hey, I&apos;m Ely — Frontend Engineer
+          Hey, I&apos;m Ely — Product Engineer
         </h1>
       </div>
       <p className="text-muted leading-relaxed">
-        What do I do? I build and optimize frontend experiences at scale: React
-        SPAs, Next.js apps, Core Web Vitals, bundle analysis, production
-        TypeScript, design system implementation, performance profiling, and
-        modern component architecture.
+        I build products end to end: product decisions, design, frontend,
+        backend, and the release pipeline. Right now that&apos;s Gymento, a
+        native iPhone and Apple Watch strength-training app I founded and took
+        from a Next.js prototype to the App Store, with a type-safe TypeScript
+        and Postgres API behind it.
+      </p>
+      <p className="text-muted leading-relaxed">
+        Before that I spent nearly five years at Amazon as a React and
+        TypeScript engineer, leading a design system migration and owning
+        performance on a platform used by 100K+ people. I work AI-natively with
+        Claude Code + Cursor, which lets me ship fast.
       </p>
     </article>
   );
