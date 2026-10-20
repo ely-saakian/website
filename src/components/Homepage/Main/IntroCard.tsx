@@ -17,10 +17,9 @@ const IntroCard = () => {
         and Postgres API behind it.
       </p>
       <p className="text-muted leading-relaxed">
-        Before that I spent nearly five years at Amazon as a React and
-        TypeScript engineer, leading a design system migration and owning
-        performance on a platform used by 100K+ people. I work AI-natively with
-        Claude Code + Cursor, which lets me ship fast.
+        Before that I spent nearly five years at Amazon as a SDE II, leading the
+        frontend for a logistics dashboard. I work AI-natively with Claude Code
+        + Cursor, which lets me ship fast.
       </p>
     </article>
   );
