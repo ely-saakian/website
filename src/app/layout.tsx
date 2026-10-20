@@ -26,15 +26,15 @@ const newsreader = Newsreader({
 });
 
 export const metadata: Metadata = {
-  title: "Ely Saakian - Frontend Engineer",
+  title: "Ely Saakian - Product Engineer",
   description:
-    "Building and optimizing frontend experiences at scale: React SPAs, Next.js apps, Core Web Vitals, bundle analysis, production TypeScript, design system implementation, performance profiling, and modern component architecture.",
+    "Product engineer building end to end: founder of Gymento, a native iPhone and Apple Watch training app, and former Amazon React / TypeScript engineer.",
   openGraph: {
-    title: "Ely Saakian - Frontend Engineer",
+    title: "Ely Saakian - Product Engineer",
     description:
-      "Building and optimizing frontend experiences at scale: React SPAs, Next.js apps, Core Web Vitals, bundle analysis, production TypeScript, design system implementation, performance profiling, and modern component architecture.",
+      "Product engineer building end to end: founder of Gymento, a native iPhone and Apple Watch training app, and former Amazon React / TypeScript engineer.",
     url: "https://elysaakian.com",
-    siteName: "Ely Saakian - Frontend Engineer",
+    siteName: "Ely Saakian - Product Engineer",
     images: [
       {
         url: "https://res.cloudinary.com/doololujs/image/upload/v1633305763/social_preview_t4z4pj.png",
