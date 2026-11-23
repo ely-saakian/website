@@ -3,11 +3,11 @@
     "title": "Gymento",
     "description": "A native iOS strength-training app that runs the plan: it sets the weight for every session, catches a stall within three sessions, and shows the reason for every change. Designed and built solo: a SwiftUI app with an Apple Watch companion and Live Activity, a Hono + Postgres API, and the Next.js landing page.",
     "url": "https://gymento.com/",
-    "imageUrl": "/images/gymento.jpg",
+    "imageUrl": "/images/gymento-live.jpg",
     "imageAlt": "Gymento's landing page: “Keep getting stronger.” beside the in-session logger on iPhone and Apple Watch",
     "date": "2026-09-26",
     "tags": ["iOS · Apple Watch"],
-    "status": "coming-soon",
+    "status": "live",
     "stack": ["SwiftUI", "Hono", "Postgres", "OpenAPI", "Next.js"]
   },
   {
